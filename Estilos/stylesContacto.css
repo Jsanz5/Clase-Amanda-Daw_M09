@@ -1,0 +1,235 @@
+/* Reiniciamos los estilos básicos */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #000;
+  color: whitesmoke;
+  line-height: 1.6;
+  background-image: url(../imagenes/fondo.jpg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-attachment: fixed;
+  backdrop-filter: blur(65px);
+}
+
+/* --- HEADER --- */
+header {
+  background-color: rgba(139, 135, 224, 0.2);
+  color: rgb(223, 99, 54);
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  display: flex; /* Para poner en fila */
+  justify-content: space-between; /* Para separar título y el nav */
+  align-items: center; /* Centrar verticalmente */
+}
+
+header h1 {
+  font-size: 50px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: whitesmoke;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+nav a:hover {
+  background-color: rgba(151, 248, 230, 0.2);
+  color: #97f8e6;
+}
+
+/* --- MAIN --- */
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+main h2 {
+  text-align: center;
+  font-size: 40px;
+  color: #62a7fb;
+  margin-bottom: 30px;
+}
+
+/* --- SECCIÓN CONTACTO --- */
+.contacto {
+  border: 2px solid #97f8e6;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+  margin-bottom: 40px;
+  overflow: hidden; /* para contener los elementos flotantes */
+}
+
+.contacto::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+h2 i {
+  margin-right: 5px;
+  color: #62a7fb;
+}
+
+/* --- FORMULARIO --- */
+.formulario {
+  float: left;
+  width: 48%;
+  padding: 10px;
+  margin-right: 2%;
+}
+
+.formulario h3 {
+  margin-bottom: 15px;
+  color: #97f8e6;
+}
+
+.formulario label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.formulario input,
+.formulario textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 18px;
+  border: none;
+  background-color: #eeececaa;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.formulario textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+.formulario button {
+  background-color: #62a7fb;
+  color: rgb(31, 28, 28);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.formulario button:hover {
+  background-color: #97f8e6;
+  color: black;
+}
+
+/* --- INFORMACIÓN DE CONTACTO E IFRAME --- */
+.info-contacto {
+  float: right;
+  width: 48%;
+  padding: 10px;
+}
+
+.info-contacto h3 {
+  margin-bottom: 10px;
+  color: #97f8e6;
+}
+
+.info-contacto p {
+  margin-bottom: 10px;
+}
+
+iframe {
+  width: 100%;
+  height: 200px;
+  border: 2px solid #62a7fb;
+  border-radius: 8px;
+}
+
+/* --- TABLA DE ESTRENOS --- */
+.tabla-anime {
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  border: 2px solid #62a7fb;
+}
+
+.tabla-anime h3 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #97f8e6;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #595656;
+  color: white;
+  margin-top: 10px;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+caption {
+  caption-side: top;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #62a7fb;
+}
+
+th,
+td {
+  border: 1px solid #a89494;
+  padding: 10px;
+  text-align: center;
+  border-radius: 8px;
+}
+
+th {
+  background-color: #2b2b2b;
+  border-radius: 8px;
+  font-size: 1.1rem;
+}
+
+tr:nth-child(even) {
+  background-color: #222;
+  border-radius: 8px;
+}
+
+/* --- FOOTER --- */
+footer {
+  color: whitesmoke;
+  text-align: center;
+  padding: 15px;
+  margin-top: 30px;
+  font-size: 0.9rem;
+  background-color: rgba(139, 135, 224, 0.1);
+}
+
+/* --- CLEAR FIX --- */
+/* Para contener los elementos flotantes ajustando su altura automáticamente de la sección .contacto */
+.contacto::after {
+  content: "";
+  display: table;
+  clear: both;
+}

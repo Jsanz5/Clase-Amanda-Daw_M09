@@ -6,11 +6,11 @@
 }
 
 body {
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: 'Poppins', sans-serif;
   background-color: #000;
   color: whitesmoke;
   line-height: 1.6; /* para que las líneas no estén todas pegadas */
-  background-image: url(imagenes/fondo.jpg); /* esto es para ponerle una imagen como estilo de fondo */
+  background-image: url(../imagenes/fondo.jpg); /* esto es para ponerle una imagen como estilo de fondo */
   background-repeat: no-repeat; /* para que no se repita como mosaico */
   background-size: contain; /* para que la imagen se ajuste bien */
   background-position: center; /* para que quede bien centrada */
@@ -29,13 +29,13 @@ header {
 }
 
 header h1 {
-  font-size: 110px;
+  font-size: 90px;
   letter-spacing: 3px; /* para que las letras tengan un espaciado adicional */
   text-transform: uppercase; /* para que todo el texto esté en mayúsculas */
 }
 
 header p {
-  font-size: 25px;
+  font-size: 20px;
   margin-top: 10px;
 }
 
@@ -52,7 +52,7 @@ nav ul {
   display: flex; /* esto es para organizar los elementos en una fila */
   justify-content: center; /* para que los elementos estén centrados horizontalmente */
   gap: 25px; /* para que haya separación entre cada enlace */
-  font-size: 22px; /* para definir un tamaño adecuado en los enlaces del menú */
+  font-size: 18px; /* para definir un tamaño adecuado en los enlaces del menú */
 }
 
 nav a {
@@ -73,11 +73,11 @@ nav a:hover {
 p {
   display: flex; /* para permitir alineación mediante flexbox */
   justify-content: center; /* para centrar el texto dentro del párrafo */
-  font-size: 20px; /* para definir el tamaño del contenido */
+  font-size: 18px; /* para definir el tamaño del contenido */
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   margin-bottom: 10px;
 }
 
@@ -153,7 +153,7 @@ main h2 {
   margin-bottom: 12px;
   padding: 10px 15px;
   border-radius: 12px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: bold;
   color: #f5f5f5;
   transition: background-color 0.3s ease; /* para suavizar el cambio de fondo al hacer hover */
@@ -179,10 +179,10 @@ main h2 {
   background-color: rgba(255, 255, 255, 0.15);
   border-radius: 50px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  padding: 15px;
+  padding: 10px;
   text-align: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease; /* para suavizar el movimiento y la sombra en hover */
-  margin: 10px 0;
+  margin: 10px 0.5px;
   flex: 1 1 250px; /* para permitir que las tarjetas se ajusten proporcionalmente */
   max-width: 280px;
 }
@@ -221,9 +221,7 @@ main h2 {
 }
 
 .tarjeta:hover {
-  transform: translateY(
-    -6px
-  ); /* para aplicar un leve desplazamiento hacia arriba */
+  transform: translateY(-6px); /* para aplicar un leve desplazamiento hacia arriba */
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
 }
 
