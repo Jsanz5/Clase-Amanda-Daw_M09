@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contacto - Z Animation</title>
+    <link rel="stylesheet" href="./Estilos/stylesContacto.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>Z Animation</h1>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="index.html"><i class="fas fa-arrow-left"></i>  Volver al Inicio</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h2><i class="fas fa-clipboard"></i> Contáctanos</h2>
+
+      <section class="contacto">
+        <div class="formulario">
+          <h3>Formulario de Contacto</h3>
+          <form>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required />
+
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" id="email" name="email" required />
+
+            <label for="mensaje">Mensaje:</label>
+            <textarea id="mensaje" name="mensaje" required></textarea>
+
+            <button type="reset">Borrar Datos</button>
+            <button type="submit">Enviar</button>
+          </form>
+        </div>
+
+        <div class="info-contacto">
+          <h3>Información de Contacto</h3>
+          <p>Email: contacto@zanimation.com</p>
+          <p>Teléfono: +34 123 456 789</p>
+          <p>Dirección: Calle Anime 123, Tokyo</p>
+
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.9537353153167!3d-37.81627974202171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d6e5b5f5b5b5!2sFederation%20Square!5e0!3m2!1ses!2sus!4v1614031234567!5m2!1ses!2sus"
+            width="300"
+            height="200"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          >
+          </iframe>
+        </div>
+      </section>
+
+      <section class="tabla-anime">
+        <h3>Calendario de Estrenos</h3>
+        <table>
+          <caption>
+            Próximos Estrenos de Anime
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Series</th>
+              <th scope="col">Fecha de Estreno</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Jujutsu Kaisen</td>
+              <td>12-11-2025</td>
+            </tr>
+            <tr>
+              <td>One Piece</td>
+              <td>01-12-2025</td>
+            </tr>
+            <tr>
+              <td>Demon Slayer</td>
+              <td>15-01-2026</td>
+            </tr>
+            <tr>
+              <td>My Hero Academia</td>
+              <td>10-02-2026</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Z Animation - Derechos Reservados</p>
+    </footer>
+  </body>
+</html>
