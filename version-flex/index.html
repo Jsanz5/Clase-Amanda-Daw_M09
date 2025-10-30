@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Z Animation</title>
+    <link rel="stylesheet" href="./Estilos/styleIndex.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="images/favicon.png" />
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <header>
+      <div class="header-left">
+        <img src="imagenes/letra-z.png" alt="Logo Z Animation" class="logo" />
+        <h1>Animation</h1>
+      </div>
+
+      <div class="header-right">
+        <nav>
+          <ul class="nav-list">
+            <li><a href="#" class="active">Inicio</a></li>
+            <li><a href="#Episodios">Episodios</a></li>
+            <li><a href="#contacto">Contáctanos</a></li>
+          </ul>
+        </nav>
+
+        <div class="cta-column">
+          <img
+            src="imagenes/img.png"
+            alt="Anime ilustración principal"
+            class="hero-img"
+          />
+          <button class="cta-button">CREAR CUENTA</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+
+    <main>
+      <div class="icon-Play"><img src="imagenes/play.png" alt="play" /></div>
+
+      <article class="article">
+        <h2>Mundo Anime</h2>
+        <p>La mayor colección de Animes a demanda del mundo</p>
+      </article>
+
+      <div class="All-Section">
+        <!-- LISTA DE EPISODIOS -->
+
+        <section class="Lista" id="Lista">
+          <h3>Últimos Episodios - Películas</h3>
+          <ul>
+            <li>Kimetsu No Yaiba - Episodios</li>
+            <li>Naruto Shippuden - Episodios</li>
+            <li>Tokyo Revengers - Episodios</li>
+            <li>Attack on Titan - Episodios</li>
+            <li>Chainsaw Man - Episodios</li>
+            <li>Dragon Ball Super - Episodios</li>
+            <li>One Piece - Episodios</li>
+            <li>Lord of Mysteries - Episodios</li>
+            <li>Death Note - Episodios</li>
+            <li>Fullmetal Alchemist - Episodios</li>
+            <li>Hunter x Hunter - Episodios</li>
+            <li>Jujutsu Kaisen - Episodios</li>
+            <li>Más Episodios...</li>
+          </ul>
+        </section>
+
+        <!-- TARJETAS DE EPISODIOS -->
+
+        <section class="tarjetas" id="Episodios">
+          <div class="tarjeta">
+            <img src="imagenes/KNY.jpg" alt="Kimetsu" />
+            <h4>Kimetsu No Yaiba - Episodio Estreno</h4>
+            <p>Un episodio lleno de acción y emociones.</p>
+            <a href="#">Ver ahora</a>
+          </div>
+
+          <div class="tarjeta">
+            <img src="imagenes/attackOnTitan.jpg" alt="Attack on Titan" />
+            <h4>Attack on Titan - Episodio Estreno</h4>
+            <p>Un mundo al borde de la extinción.</p>
+            <a href="#">Ver ahora</a>
+          </div>
+
+          <div class="tarjeta">
+            <img src="imagenes/DBZ.jpg" alt="DBZ" />
+            <h4>Dragon Ball Super - Episodio Estreno</h4>
+            <p>Vuelve Dragon Ball con una nueva serie tras muchos años.</p>
+            <a href="#">Ver ahora</a>
+          </div>
+
+          <div class="tarjeta">
+            <img src="imagenes/Naruto.jpg" alt="Naruto" />
+            <h4>Naruto Shippuden - Episodio Estreno</h4>
+            <p>Momentos decisivos que cambiarán la historia.</p>
+            <a href="#">Ver ahora</a>
+          </div>
+
+          <div class="tarjeta">
+            <img src="imagenes/JujutsuKaisen.png" alt="Jujutsu Kaisen" />
+            <h4>Jujutsu Kaisen - Episodio Estreno</h4>
+            <p>
+              Así se escribe la leyenda de los hechiceros y del poder que puede
+              destruirlo todo.
+            </p>
+            <a href="#">Ver ahora</a>
+          </div>
+
+          <div class="tarjeta">
+            <img src="imagenes/Lord.png" alt="Lord" />
+            <h4>Lord of Mysteries - Episodio Estreno</h4>
+            <p>
+              Esta es la leyenda de un potencial ilimitado... y de un peligro
+              indescriptible.
+            </p>
+            <a href="#">Ver ahora</a>
+          </div>
+
+          <div class="tarjeta">
+            <img src="imagenes/Tokyo_revengers.jpg" alt="Tokyo" />
+            <h4>Tokyo Revengers - Episodio Estreno</h4>
+            <p>El protagonista descubre un nuevo poder.</p>
+            <a href="#">Ver ahora</a>
+          </div>
+
+          <div class="tarjeta">
+            <img src="imagenes/One_Piece.jpg" alt="One_Piece" />
+            <h4>One Piece - Episodio Estreno</h4>
+            <p>Embárcate en el viaje de tu vida con One Piece.</p>
+            <a href="#">Ver ahora</a>
+          </div>
+        </section>
+
+        <!-- CONTACTO -->
+        <section class="contacto" id="contacto">
+          <h2 class="contacto-titulo">Contáctanos</h2>
+
+          <div class="contact-wrapper">
+            <!-- FORMULARIO -->
+            <div class="formulario">
+              <h3>Formulario de Contacto</h3>
+              <form>
+                <label for="nombre">Nombre</label>
+                <input
+                  type="text"
+                  id="nombre"
+                  name="nombre"
+                  placeholder="Tu nombre"
+                  required
+                />
+
+                <label for="email">Correo Electrónico</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="ejemplo@correo.com"
+                  required
+                />
+
+                <label for="mensaje">Mensaje</label>
+                <textarea
+                  id="mensaje"
+                  name="mensaje"
+                  placeholder="Escribe tu mensaje..."
+                  required
+                ></textarea>
+
+                <div class="buttons">
+                  <button type="reset">Borrar</button>
+                  <button type="submit">Enviar</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- INFORMACIÓN DE CONTACTO -->
+            <div class="info-contacto">
+              <h3>Información de Contacto</h3>
+              <p><strong>Email:</strong> contacto@zanimation.com</p>
+              <p><strong>Teléfono:</strong> +34 123 456 789</p>
+              <p><strong>Dirección:</strong> Calle Anime 123, Tokyo</p>
+
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.9537353153167!3d-37.81627974202171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d6e5b5f5b5b5!2sFederation%20Square!5e0!3m2!1ses!2sus!4v1614031234567!5m2!1ses!2sus"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              >
+              </iframe>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>&copy; 2025 Z Animation - Derechos Reservados</p>
+      <section class="social">
+        <h4>Síguenos en nuestras redes sociales</h4>
+        <a
+          href="https://www.flaticon.es/iconos-gratis/facebook"
+          title="facebook"
+        >
+          <img src="imagenes/facebook.png" alt="facebook" />
+        </a>
+        <a
+          href="https://www.flaticon.es/iconos-gratis/logotipo-de-instagram"
+          title="instagram"
+        >
+          <img src="imagenes/instagram.png" alt="instagram" />
+        </a>
+        <a
+          href="https://www.flaticon.es/iconos-gratis/logotipo-de-twitter"
+          title="twitter"
+        >
+          <img src="imagenes/twitter.png" alt="twitter" />
+        </a>
+      </section>
+    </footer>
+  </body>
+</html>
