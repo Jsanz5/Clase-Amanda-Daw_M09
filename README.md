@@ -22,17 +22,18 @@ La interfaz está pensada para ser atractiva, fácil de navegar y agradable para
 📂 Estructura del Proyecto
 
 Clase-Amanda-Daw_M09/
-│
-├─ index.html # Página principal
-│
-├─ Estilos/ # Carpeta de estilos CSS
-│ └─ style.css
-│
-├─ imagenes/ # Carpeta de imágenes (portadas, fondos, etc.)
+
+├── index.html # Página principal
+|
+├── Estilos/ # Carpeta de estilos CSS
+|
+│ └── style.css
+|
+└── imagenes/ # Carpeta de imágenes (portadas, fondos, etc.)
 
 ✨ Explicación del HTML
 
-Header (<header>)
+Header:
 
 - Contiene la barra de navegación (navbar) de Bootstrap.
 
@@ -40,17 +41,17 @@ Header (<header>)
 
 - El menú es responsive, colapsando en un ícono tipo hamburguesa en dispositivos móviles.
 
-Sección principal (<main>)
+Sección principal:
 
 - Organiza los videos de anime usando cards de Bootstrap.
 
 Cada card incluye:
 
-- Imagen de portada (<img>).
+- Imagen de portada.
 
-- Título del anime (<h5>).
+- Título del anime.
 
-Breve descripción (<p>).
+Breve descripción.
 
 - Botón para reproducir o abrir un modal con el video.
 
@@ -58,7 +59,7 @@ Breve descripción (<p>).
 
 - Garantizan una experiencia limpia, fluida y profesional.
 
-Footer (<footer>)
+Footer:
 
 Contiene información de derechos de autor y enlaces adicionales.
 
