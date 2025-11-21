@@ -17,6 +17,17 @@ html {
   box-sizing: border-box;
 }
 
+/*------------------------------- 
+         EJERCICIO 6.1 
+/*-------------------------------*/
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   background: radial-gradient(circle, rgb(61, 42, 22) 0%, rgb(0, 0, 0) 100%);
@@ -121,12 +132,59 @@ body {
   box-shadow: 0 6px 25px rgba(151, 248, 230, 0.5);
 }
 
+a.btn-registrar {
+  margin-top: clamp(15px, 4vw, 25px);
+  text-align: center;
+  color: var(--color-texto) !important;
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  font-weight: 600;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+  display: inline-block;
+  box-shadow: #6c757d;
+  padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 30px);
+  border-radius: 12px;
+  background-color: rgba(98, 167, 251, 0.2);
+}
+
+a.btn-registrar:hover {
+  color: var(--color-principal) !important;
+  text-decoration: none;
+}
+
 /****************************************************************/
 /* HERO SECTION - RESPONSIVE */
 
+/*-------------------------
+       EJERCICIO 6.2 
+/*-------------------------*/
 .hero-section {
+  position: relative; /* necesario para el pseudo-elemento */
   text-align: center;
   padding: clamp(30px, 8vw, 60px) clamp(10px, 5vw, 20px) clamp(20px, 6vw, 40px);
+  overflow: hidden; /* para que el blur no sobresalga */
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/Clase-Amanda-Daw_M09/imagenes/fondo.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  filter: blur(180px); /* ajuste del desenfoque */
+  transform: scale(1.05); /* opcional para cubrir los bordes difuminados */
+  z-index: 0;
+}
+
+/* Aseguramos que el contenido esté encima del fondo desenfocado */
+.hero-section > * {
+  position: relative;
+  z-index: 1;
 }
 
 .icon-play {
@@ -708,5 +766,45 @@ footer p {
 
   .hero-title {
     font-size: 2rem;
+  }
+}
+
+/*-------------------------
+       EJERCICIO 6.3 
+-------------------------*/
+
+/* Desktop */
+@media (min-width: 992px) {
+  .hero-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .anime-card img {
+    height: 250px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 991px) {
+  .hero-avatar {
+    width: 35px;
+    height: 35px;
+  }
+
+  .anime-card img {
+    height: 200px;
+  }
+}
+
+/* Móvil */
+@media (max-width: 480px) {
+  .hero-avatar {
+    width: 30px;
+    height: 30px;
+  }
+
+  .anime-card img {
+    height: 150px;
   }
 }
