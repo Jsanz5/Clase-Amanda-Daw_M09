@@ -32,7 +32,7 @@ body {
   line-height: 1.6;
 }
 
-/* Para la capa del fondo difuso fijo */
+/* Pa la capa del fondo difuso fijo */
 body::before {
   content: "";
   position: fixed;
@@ -41,7 +41,7 @@ body::before {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover; /* para llenar bien el fondo */
-  filter: blur(15px) brightness(0.3); /* efecto blur y algo pa oscurecer un poco*/
+  filter: blur(15px) brightness(0.3); /* efecto blur y algo pa oscurecer un poquito*/
   z-index: -1;
   pointer-events: none;
 }

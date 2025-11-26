@@ -1,17 +1,15 @@
-/* =========================
-   CONFIGURACIÓN GENERAL
-========================= */
-
+/* Configuración Base */
 html {
   scroll-behavior: smooth;
 }
 
+/* Variables Globales */
 :root {
   --color-principal: #62a7fb;
   --color-acento: #cf7609;
   --color-texto: whitesmoke;
   --transicion: 0.3s ease;
-  --color-fondo-caja: rgba(255, 255, 255, 0.06);
+  --color-fondo-caja: rgba(255, 255, 255, 0.059);
   --sombra-caja: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
@@ -21,145 +19,125 @@ html {
   box-sizing: border-box;
 }
 
-/* =========================
-   BODY
-========================= */
-
 body {
   font-family: "Poppins", sans-serif;
   background-color: #000;
   color: whitesmoke;
   line-height: 1.6;
-
-  background-image: url(../imagenes/fondo.jpg);
+  background-image: url("../imagenes/fondo.jpg");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; /* Cambiado a cover para un mejor fondo */
   background-position: center;
   background-attachment: fixed;
-
+  position: relative;
   min-height: 100vh;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
-  padding: 0;
-  overflow-x: hidden;
 }
 
-/* Overlay difuminado */
+/* Overlay para desenfoque y oscurecimiento del fondo */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(90px);
+  backdrop-filter: blur(80px);
   z-index: -1;
 }
 
-/* =========================
-   SECCIÓN REGISTRO
-========================= */
-
+/* Aseguro el centrado y la altura mínima */
 .registro-section {
   width: 100%;
   max-width: 900px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 15px;
+  gap: 18px;
 }
 
-/* Título */
+/* Título de la sección */
 .registro-titulo {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(2rem, 4vw, 3.5rem);
   font-weight: bold;
   color: var(--color-acento);
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
   text-align: center;
 }
 
-/* Subtítulo */
-.registro-subtitulo,
-.registro-titulo p {
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
+.registro-section p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
   background-color: rgba(98, 167, 251, 0.2);
-  padding: 8px 20px;
+  padding: 8px 25px;
   border-radius: 12px;
   color: var(--color-principal);
+  box-shadow: #62a7fb 0px 0px 10px;
+  box-shadow: 0 0 10px rgba(98, 167, 251, 0.3);
+  justify-content: center;
+  margin-top: 10px;
   text-align: center;
 }
 
-/* =========================
-   CAJA CIRCULAR FORMULARIO
-========================= */
-
 .contact-box {
-  background: var(--color-fondo-caja);
-  backdrop-filter: blur(15px);
-  border: 1 solid #ffffff1e;
-  box-shadow: var(--sombra-caja);
-
-  width: clamp(270px, 55vw, 430px);
-  height: clamp(270px, 55vw, 430px);
-
-  border-radius: 50%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: clamp(20px, 4vw, 30px);
+  transition: transform var(--transicion);
 }
 
-/* Contenido del formulario */
-.formulario,
-#registroFormulario {
-  width: 65%;
-  max-width: 260px; /* límite perfecto para que no sobresalga */
-  margin: 0 auto; /* centra horizontalmente */
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.contact-box:hover {
+  transform: translateY(-3px);
 }
 
-/* =========================
-   INPUTS
-========================= */
+/* Etiquetas */
+.form-label {
+  color: var(--color-texto);
+  font-weight: 500;
+  margin-bottom: 8px;
+  font-size: clamp(0.85rem, 2vw, 1rem);
+}
 
+/* Inputs y Textareas*/
 .form-control {
-  background: transparent;
+  background-color: transparent;
   border: none;
   border-bottom: 2px solid #ffffff38;
-  color: #fff !important;
+  color: white !important;
+  padding: 10px 0 10px 5px; /* acá este padding izquierdo es pa alinear el texto con la etiqueta */
   border-radius: 0;
-  padding: 10px 5px;
-  font-size: clamp(0.9rem, 2vw, 1rem);
-  transition: var(--transicion);
-}
-
-.form-control::placeholder {
-  color: #ffffffb5;
+  transition: border-color var(--transicion), box-shadow var(--transicion);
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  width: 100%;
+  text-align: left !important;
 }
 
 .form-control:focus {
+  background-color: transparent;
   border-color: var(--color-principal);
   box-shadow: none;
+  outline: none;
 }
 
-/* =========================
-   BOTÓN
-========================= */
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+}
 
+/* Contenedor de Botones */
+.d-flex.gap-3 {
+  margin-top: clamp(15px, 4vw, 25px);
+}
+
+/* Estilos de Botones Generales */
 .btn-form {
-  padding: 12px;
-  font-size: clamp(1rem, 2vw, 1.1rem);
-  font-weight: 600;
-  border: none;
+  padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 30px);
   border-radius: 12px;
-  cursor: pointer;
+  font-weight: 600;
   transition: var(--transicion);
+  border: none;
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  width: 100%;
 }
 
+/* Botón de Registrarse*/
 .btn-submit {
   background: linear-gradient(135deg, var(--color-principal), #97f8e6);
   color: #000;
@@ -167,40 +145,38 @@ body::before {
 
 .btn-submit:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 15px rgba(151, 248, 230, 0.4);
+  box-shadow: 0 5px 20px rgba(151, 248, 230, 0.5);
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-
-/* Móviles muy pequeños */
-@media (max-width: 380px) {
-  .contact-box {
-    width: 230px;
-    height: 230px;
+/* Media Query pa asegurar que los botones se vean bien en móvil */
+@media (max-width: 576px) {
+  .d-flex.gap-3 {
+    flex-direction: column;
   }
-
-  #registroFormulario {
-    width: 82%;
+  .d-flex.gap-3 .btn-form {
+    margin-bottom: 10px; /* Espacio adicional en móvil */
   }
 }
 
-/* Tablets */
-@media (max-width: 768px) {
-  .contact-box {
-    width: clamp(260px, 70vw, 360px);
-    height: clamp(260px, 70vw, 360px);
-  }
+/* ESTILOS DE SPACING Y UTILITIES  */
+.my-5 {
+  margin-top: clamp(1.5rem, 4vw, 3rem) !important;
+  margin-bottom: clamp(1.5rem, 4vw, 3rem) !important;
 }
 
-/* Scrollbar bonito */
+.mb-4 {
+  margin-bottom: clamp(1rem, 3vw, 1.5rem) !important;
+}
+
+/* SCROLLBAR  */
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.5);
 }
+
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(
     180deg,
@@ -209,6 +185,7 @@ body::before {
   );
   border-radius: 10px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #97f8e6, var(--color-principal));
 }
