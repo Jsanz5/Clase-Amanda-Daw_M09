@@ -1,15 +1,17 @@
-/* Configuración Base */
+/* =========================
+   CONFIGURACIÓN GENERAL
+========================= */
+
 html {
   scroll-behavior: smooth;
 }
 
-/* Variables Globales */
 :root {
   --color-principal: #62a7fb;
   --color-acento: #cf7609;
   --color-texto: whitesmoke;
   --transicion: 0.3s ease;
-  --color-fondo-caja: rgba(255, 255, 255, 0.059);
+  --color-fondo-caja: rgba(255, 255, 255, 0.06);
   --sombra-caja: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
@@ -19,145 +21,145 @@ html {
   box-sizing: border-box;
 }
 
+/* =========================
+   BODY
+========================= */
+
 body {
   font-family: "Poppins", sans-serif;
   background-color: #000;
   color: whitesmoke;
   line-height: 1.6;
+
   background-image: url(../imagenes/fondo.jpg);
   background-repeat: no-repeat;
-  background-size: cover; /* Cambiado a cover para un mejor fondo */
+  background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  position: relative;
+
   min-height: 100vh;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
+  padding: 0;
+  overflow-x: hidden;
 }
 
-/* Overlay para desenfoque y oscurecimiento del fondo */
+/* Overlay difuminado */
 body::before {
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(100px);
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(90px);
   z-index: -1;
 }
 
-/* Aseguro el centrado y la altura mínima */
+/* =========================
+   SECCIÓN REGISTRO
+========================= */
+
 .registro-section {
-  display: flex;
-  flex-direction: column; /* Títulos arriba y el formulario debajo */
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 20px;
   width: 100%;
-}
-
-/* Título de la sección */
-.registro-titulo {
-  font-size: 2em;
-  font-weight: bold;
-  color: var(--color-acento);
-  text-shadow: 0 0 10px #6c757d;
-}
-
-.registro-titulo p {
-  font-size: 0.8em;
-  display: flex;
-  justify-content: center;
-  align-items: center; /* Asegura que el texto esté centrado verticalmente si hay padding */
-  color: var(--color-principal);
-  max-width: 350px; /* Defino el ancho máximo */
-  margin: 20px auto; /* Centro el bloque horizontalmente*/
-  padding: 0;
-
-  box-shadow: #6c757d;
-  background-color: rgba(98, 167, 251, 0.2);
-  border-radius: 15px;
-}
-
-.contact-box {
-  background: var(--color-fondo-caja);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 50%; /* 👈 Esto la vuelve circular */
-  padding: clamp(25px, 6vw, 40px);
-  box-shadow: var(--sombra-caja);
-  border: 1px solid #ffffff38;
-  transition: transform var(--transicion);
-  width: 430px;
-  height: 430px;
-
+  max-width: 900px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
+  gap: 15px;
 }
 
-.contact-box:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
-}
-
-/* Etiquetas (Form Labels) */
-.form-label {
-  color: var(--color-texto);
-  font-weight: 500;
-  margin-bottom: 8px;
-  font-size: clamp(0.85rem, 2vw, 1rem);
-}
-
-/* Inputs y Textareas*/
-.form-control {
-  background-color: transparent;
-  border: none;
-  border-bottom: 2px solid #ffffff38;
-  color: white !important;
-  padding: 10px 0 10px 5px; /* acá este padding izquierdo es para alinear el texto con la etiqueta */
-  border-radius: 0;
-  transition: border-color var(--transicion), box-shadow var(--transicion);
-  font-size: clamp(0.85rem, 2vw, 1rem);
-  width: 100%;
-  text-align: left !important;
-}
-
-.form-control:focus {
-  background-color: transparent;
-  border-color: var(--color-principal);
-  box-shadow: none;
-  outline: none;
-}
-
-.form-control::placeholder {
-  color: rgba(255, 255, 255, 0.7);
+/* Título */
+.registro-titulo {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: bold;
+  color: var(--color-acento);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
   text-align: center;
 }
 
-/* Contenedor de Botones */
-.d-flex.gap-3 {
-  margin-top: clamp(15px, 4vw, 25px);
-}
-
-/* Estilos de Botones Generales */
-.btn-form {
-  padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 30px);
+/* Subtítulo */
+.registro-subtitulo,
+.registro-titulo p {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  background-color: rgba(98, 167, 251, 0.2);
+  padding: 8px 20px;
   border-radius: 12px;
-  font-weight: 600;
-  transition: var(--transicion);
-  border: none;
-  font-size: clamp(0.85rem, 2vw, 1rem);
-  width: 100%;
+  color: var(--color-principal);
+  text-align: center;
 }
 
-/* Botón de Registrarse*/
+/* =========================
+   CAJA CIRCULAR FORMULARIO
+========================= */
+
+.contact-box {
+  background: var(--color-fondo-caja);
+  backdrop-filter: blur(15px);
+  border: 1 solid #ffffff1e;
+  box-shadow: var(--sombra-caja);
+
+  width: clamp(270px, 55vw, 430px);
+  height: clamp(270px, 55vw, 430px);
+
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Contenido del formulario */
+.formulario,
+#registroFormulario {
+  width: 65%;
+  max-width: 260px; /* límite perfecto para que no sobresalga */
+  margin: 0 auto; /* centra horizontalmente */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+.form-control {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #ffffff38;
+  color: #fff !important;
+  border-radius: 0;
+  padding: 10px 5px;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  transition: var(--transicion);
+}
+
+.form-control::placeholder {
+  color: #ffffffb5;
+}
+
+.form-control:focus {
+  border-color: var(--color-principal);
+  box-shadow: none;
+}
+
+/* =========================
+   BOTÓN
+========================= */
+
+.btn-form {
+  padding: 12px;
+  font-size: clamp(1rem, 2vw, 1.1rem);
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: var(--transicion);
+}
+
 .btn-submit {
   background: linear-gradient(135deg, var(--color-principal), #97f8e6);
   color: #000;
@@ -165,38 +167,40 @@ body::before {
 
 .btn-submit:hover {
   transform: scale(1.05);
-  box-shadow: 0 5px 20px rgba(151, 248, 230, 0.5);
+  box-shadow: 0 4px 15px rgba(151, 248, 230, 0.4);
 }
 
-/* Media Query para asegurar que los botones se vean bien en móvil */
-@media (max-width: 576px) {
-  .d-flex.gap-3 {
-    flex-direction: column;
+/* =========================
+   RESPONSIVE
+========================= */
+
+/* Móviles muy pequeños */
+@media (max-width: 380px) {
+  .contact-box {
+    width: 230px;
+    height: 230px;
   }
-  .d-flex.gap-3 .btn-form {
-    margin-bottom: 10px; /* Espacio adicional en móvil */
+
+  #registroFormulario {
+    width: 82%;
   }
 }
 
-/* ESTILOS DE SPACING Y UTILITIES DE TU REFERENCIA */
-.my-5 {
-  margin-top: clamp(1.5rem, 4vw, 3rem) !important;
-  margin-bottom: clamp(1.5rem, 4vw, 3rem) !important;
+/* Tablets */
+@media (max-width: 768px) {
+  .contact-box {
+    width: clamp(260px, 70vw, 360px);
+    height: clamp(260px, 70vw, 360px);
+  }
 }
 
-.mb-4 {
-  margin-bottom: clamp(1rem, 3vw, 1.5rem) !important;
-}
-
-/* SCROLLBAR  */
+/* Scrollbar bonito */
 ::-webkit-scrollbar {
   width: 8px;
 }
-
 ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.5);
 }
-
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(
     180deg,
@@ -205,7 +209,6 @@ body::before {
   );
   border-radius: 10px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #97f8e6, var(--color-principal));
 }

@@ -24,16 +24,26 @@ html {
 }
 
 body {
-  font-family: "Poppins", sans-serif;
-  background-color: #000;
+  position: relative;
+  overflow-x: hidden;
+  background: black; /* Fondo negro base */
   color: whitesmoke;
-  line-height: 1.6; /* para que las líneas no estén todas pegadas */
-  background-image: url(../imagenes/fondo.jpg); /* esto es para ponerle una imagen como estilo de fondo */
-  background-repeat: no-repeat; /* para que no se repita como mosaico */
-  background-size: contain; /* para que la imagen se ajuste bien */
-  background-position: center; /* para que quede bien centrada */
-  background-attachment: fixed; /* para que el fondo no se mueva al hacer scroll */
-  backdrop-filter: blur(100px); /* para que el fondo tenga un desenfoque */
+  font-family: "Poppins", sans-serif;
+  line-height: 1.6;
+}
+
+/* Para la capa del fondo difuso fijo */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url(../imagenes/fondo.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; /* para llenar bien el fondo */
+  filter: blur(15px) brightness(0.3); /* efecto blur y algo pa oscurecer un poco*/
+  z-index: -1;
+  pointer-events: none;
 }
 
 /****************************************************************/
@@ -750,6 +760,12 @@ footer p {
 
   .hero-title {
     font-size: 2rem;
+  }
+}
+
+@media (min-width: 992px) {
+  body::before {
+    filter: blur(100px) brightness(0.3);
   }
 }
 
