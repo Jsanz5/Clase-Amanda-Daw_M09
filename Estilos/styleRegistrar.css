@@ -24,7 +24,7 @@ body {
   background-color: #000;
   color: whitesmoke;
   line-height: 1.6;
-  background-image: url("../imagenes/fondo.jpg");
+  background-image: url(../imagenes/fondo.jpg);
   background-repeat: no-repeat;
   background-size: cover; /* Cambiado a cover para un mejor fondo */
   background-position: center;
@@ -40,54 +40,74 @@ body {
 body::before {
   content: "";
   position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(80px);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(100px);
   z-index: -1;
 }
 
 /* Aseguro el centrado y la altura mínima */
 .registro-section {
-  width: 100%;
-  max-width: 900px;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Títulos arriba y el formulario debajo */
+  justify-content: center;
   align-items: center;
-  gap: 18px;
+  min-height: 100vh;
+  padding: 20px;
+  width: 100%;
 }
 
 /* Título de la sección */
 .registro-titulo {
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: 2em;
   font-weight: bold;
   color: var(--color-acento);
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-  text-align: center;
+  text-shadow: 0 0 10px #6c757d;
 }
 
-.registro-section p {
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  background-color: rgba(98, 167, 251, 0.2);
-  padding: 8px 25px;
-  border-radius: 12px;
-  color: var(--color-principal);
-  box-shadow: #62a7fb 0px 0px 10px;
-  box-shadow: 0 0 10px rgba(98, 167, 251, 0.3);
+.registro-titulo p {
+  font-size: 0.8em;
+  display: flex;
   justify-content: center;
-  margin-top: 10px;
-  text-align: center;
+  align-items: center; /* Asegura que el texto esté centrado verticalmente si hay padding */
+  color: var(--color-principal);
+  max-width: 350px; /* Defino el ancho máximo */
+  margin: 20px auto; /* Centro el bloque horizontalmente*/
+  padding: 0;
+
+  box-shadow: #6c757d;
+  background-color: rgba(98, 167, 251, 0.2);
+  border-radius: 15px;
 }
 
 .contact-box {
-  padding: clamp(20px, 4vw, 30px);
+  background: var(--color-fondo-caja);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 50%; /* 👈 Esto la vuelve circular */
+  padding: clamp(25px, 6vw, 40px);
+  box-shadow: var(--sombra-caja);
+  border: 1px solid #ffffff38;
   transition: transform var(--transicion);
+  width: 430px;
+  height: 430px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
 }
 
 .contact-box:hover {
   transform: translateY(-3px);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
 }
 
-/* Etiquetas */
+/* Etiquetas (Form Labels) */
 .form-label {
   color: var(--color-texto);
   font-weight: 500;
@@ -101,7 +121,7 @@ body::before {
   border: none;
   border-bottom: 2px solid #ffffff38;
   color: white !important;
-  padding: 10px 0 10px 5px; /* acá este padding izquierdo es pa alinear el texto con la etiqueta */
+  padding: 10px 0 10px 5px; /* acá este padding izquierdo es para alinear el texto con la etiqueta */
   border-radius: 0;
   transition: border-color var(--transicion), box-shadow var(--transicion);
   font-size: clamp(0.85rem, 2vw, 1rem);
@@ -148,7 +168,7 @@ body::before {
   box-shadow: 0 5px 20px rgba(151, 248, 230, 0.5);
 }
 
-/* Media Query pa asegurar que los botones se vean bien en móvil */
+/* Media Query para asegurar que los botones se vean bien en móvil */
 @media (max-width: 576px) {
   .d-flex.gap-3 {
     flex-direction: column;
@@ -158,7 +178,7 @@ body::before {
   }
 }
 
-/* ESTILOS DE SPACING Y UTILITIES  */
+/* ESTILOS DE SPACING Y UTILITIES DE TU REFERENCIA */
 .my-5 {
   margin-top: clamp(1.5rem, 4vw, 3rem) !important;
   margin-bottom: clamp(1.5rem, 4vw, 3rem) !important;

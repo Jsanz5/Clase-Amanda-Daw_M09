@@ -19,6 +19,14 @@
     />
 
     <link rel="stylesheet" href="./Estilos/styleIndex.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
   </head>
   <body>
     <!-- NAV -->
@@ -301,6 +309,57 @@
           </div>
         </div>
       </div>
+
+      <!-- Sobre el autor -->
+      <section class="mt-5 pt-5 mb-5" id="sobre-mi">
+        <div class="contact-box">
+          <div class="row align-items-center">
+            <div class="col-md-3 text-center mb-3 mb-md-0">
+              <img
+                src="imagenes/img.png"
+                alt="Autor"
+                class="img-fluid rounded-circle border border-primary"
+                style="max-width: 150px; border-width: 3px !important"
+              />
+            </div>
+
+            <div class="col-md-9">
+              <h2 class="contacto-titulo text-start mt-0">Sobre la Página</h2>
+              <p class="mb-4">
+                ¡Hola! Bienvenido a <strong>Z Animation</strong>. He creado este
+                espacio para compartir los mejores estrenos de anime. Abajo
+                puedes escuchar una breve presentación sobre el proyecto y mis
+                objetivos.
+              </p>
+
+              <div
+                class="audio-container p-3 rounded shadow-sm"
+                style="
+                  background-color: rgba(98, 167, 251, 0.1);
+                  border: 1px solid #62a7fb;
+                "
+              >
+                <div class="d-flex align-items-center gap-3 mb-2">
+                  <i class="fas fa-headphones text-primary"></i>
+                  <span class="fw-bold text-white">Presentación</span>
+                </div>
+
+                <audio controls class="w-100 custom-audio">
+                  <source src="audio/presentacion_web.mp3" type="audio/mpeg" />
+                  <source src="audio/presentacion_web.ogg" type="audio/ogg" />
+                  Tu navegador no soporta el elemento de audio.
+                </audio>
+
+                <div class="mt-2 text-end">
+                  <small class="text-muted"
+                    >Formato: MP3/OGG Optimizado (22kHz)</small
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <!-- CONTACTOS -->
       <section class="contacto-section" id="contacto">

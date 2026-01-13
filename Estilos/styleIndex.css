@@ -24,26 +24,16 @@ html {
 }
 
 body {
-  position: relative;
-  overflow-x: hidden;
-  background: black; /* Fondo negro base */
-  color: whitesmoke;
   font-family: "Poppins", sans-serif;
-  line-height: 1.6;
-}
-
-/* Pa la capa del fondo difuso fijo */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: url(../imagenes/fondo_exportado.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover; /* para llenar bien el fondo */
-  filter: blur(15px) brightness(0.3); /* efecto blur y algo pa oscurecer un poquito*/
-  z-index: -1;
-  pointer-events: none;
+  background-color: #000;
+  color: whitesmoke;
+  line-height: 1.6; /* para que las líneas no estén todas pegadas */
+  background-image: url(../imagenes/fondo.jpg); /* esto es para ponerle una imagen como estilo de fondo */
+  background-repeat: no-repeat; /* para que no se repita como mosaico */
+  background-size: contain; /* para que la imagen se ajuste bien */
+  background-position: center; /* para que quede bien centrada */
+  background-attachment: fixed; /* para que el fondo no se mueva al hacer scroll */
+  backdrop-filter: blur(100px); /* para que el fondo tenga un desenfoque */
 }
 
 /****************************************************************/
@@ -763,12 +753,6 @@ footer p {
   }
 }
 
-@media (min-width: 992px) {
-  body::before {
-    filter: blur(100px) brightness(0.3);
-  }
-}
-
 /*-------------------------
        EJERCICIO 6.3 
 -------------------------*/
@@ -806,5 +790,39 @@ footer p {
 
   .anime-card img {
     height: 150px;
+  }
+
+  /****************************************************************/
+  /* SECCIÓN SOBRE MÍ - AJUSTES GLOBALES (Fase 4) */
+
+  #sobre-mi {
+    display: block;
+    clear: both;
+    margin-top: 100px !important; /* Margen superior amplio */
+    margin-bottom: 60px !important; /* Margen inferior */
+    padding-top: 20px;
+  }
+
+  /* diseño del reproductor para que no se vea tan gris */
+  .custom-audio {
+    filter: invert(15%) hue-rotate(180deg) brightness(1.2);
+    border-radius: 50px;
+    background: var(--color-principal);
+  }
+
+  /* Estilos de botones de audio que pide la práctica */
+  .audio-control-btn {
+    background-color: var(--color-principal);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    transition: var(--transicion);
+  }
+
+  .audio-control-btn:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
   }
 }
