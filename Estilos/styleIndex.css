@@ -617,6 +617,29 @@ footer p {
   box-shadow: 0 5px 15px rgba(98, 167, 251, 0.4);
 }
 
+.language-section {
+  display: flex;
+  flex-direction: column; /* TEXTO ARRIBA, BOTONES ABAJO */
+  align-items: center; /* CENTRA COMO LAS REDES */
+}
+
+@media (min-width: 768px) {
+  .language-section {
+    align-items: flex-start; /* desktop igual que redes */
+  }
+}
+
+.language-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.select-language {
+  display: flex;
+  gap: 10px;
+}
+
 /****************************************************************/
 /* SPACING RESPONSIVE */
 
