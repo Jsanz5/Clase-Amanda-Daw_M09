@@ -321,11 +321,13 @@ function setLanguage(lang) {
   });
 }
 
+// Fase 4: Almaceno las persistencias de preferencias de idioma
 // Guardo las preferencias de idioma en localStorage
 function savePreference(lang) {
   localStorage.setItem("userLang", lang);
 }
 
+// Fase 4: Cargo las preferencias de idioma al iniciar la página
 // Cargo preferencias al iniciar de la página para mantener el idioma seleccionado
 function loadPreference() {
   let preferredLang = localStorage.getItem("userLang") || "es";
