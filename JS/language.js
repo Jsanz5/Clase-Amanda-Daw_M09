@@ -217,6 +217,13 @@ const translations = {
 
   "btn-watch": { ca: "Veure ara", es: "Ver ahora", en: "Watch now" },
 
+  // video welcome message
+  "welcome-message": {
+    ca: "Benvinguts!",
+    es: "¡Bienvenidos!",
+    en: "Welcome!",
+  },
+
   // SOBRE MI
   "about-title": {
     ca: "Sobre la Pàgina",

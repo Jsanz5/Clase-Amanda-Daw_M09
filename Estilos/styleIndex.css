@@ -824,6 +824,7 @@ footer p {
     margin-top: 100px !important; /* Margen superior amplio */
     margin-bottom: 60px !important; /* Margen inferior */
     padding-top: 20px;
+    text-align: left;
   }
 
   /* diseño del reproductor para que no se vea tan gris */
