@@ -232,9 +232,9 @@ const translations = {
   },
 
   "about-content": {
-    ca: "Hola! Benvingut a Z Animation. He creat aquest espai per compartir els millors estrenes d'anime. A sota trobaràs una selecció dels meus animes preferits, amb ressenyes i enllaços per veure'ls. Gaudeix-ne!",
-    es: "¡Hola! Bienvenido a Z Animation. He creado este espacio para compartir los mejores estrenos de anime. Abajo encontrarás una selección de mis animes favoritos, con reseñas y enlaces para verlos. ¡Disfrútalos!",
-    en: "Hello! Welcome to Z Animation. I created this space to share the best anime releases. Below you'll find a selection of my favorite animes, with reviews and links to watch them. Enjoy!",
+    es: "¡Hola! Bienvenido a Z Animation. He creado este espacio para compartir los mejores estrenos del anime. Podrás encontrar una selección de mis animes favoritos, con reseñas y enlaces para verlos. ¡Disfrútalos!",
+    ca: "Hola! Benvingut a Z Animation. He creat aquest espai per compartir els millors estrenes de l'anime. Podràs trobar una selecció dels meus animes preferits, amb ressenyes i enllaços per veure'ls. Gaudeix-los!",
+    en: "Hello! Welcome to Z Animation. I created this space to share the best anime premieres. You can find a selection of my favorite animes, with reviews and links to watch them. Enjoy!",
   },
 
   "about-audio-title": {
