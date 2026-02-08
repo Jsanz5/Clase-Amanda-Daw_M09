@@ -56,45 +56,63 @@ body {
   color: var(--color-acento) !important;
   font-weight: 700;
   transition: var(--transicion);
+  animation: pulse 2s infinite; /* creo la animación de pulso para el logo en el header*/
 }
 
 .navbar-brand img {
   width: clamp(35px, 10vw, 50px);
   height: clamp(35px, 10vw, 50px);
   border-radius: 12px;
-  transition: var(--transicion);
+  animation: logoPulse 2.5s ease-in-out infinite;
 }
 
+/** 
+ * Estilos base de los enlaces de navegación
+ * Se define el aspecto inicial y se aplica una transición
+ * para suavizar cualquier cambio visual (color, fondo, etc.)
+ */
 .nav-link {
-  color: white !important;
-  font-weight: 600;
-  padding: 8px 12px !important;
-  border-radius: 10px;
-  transition: var(--transicion);
-  margin: 2px 0;
-  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: white !important; /* Color base del enlace */
+  font-weight: 600; /* Texto ligeramente más grueso */
+  padding: 8px 12px !important; /* Espaciado interno */
+  border-radius: 10px; /* Bordes redondeados */
+  transition: var(--transicion); /* Transición suave para los cambios */
+  margin: 2px 0; /* Separación vertical entre enlaces */
+  font-size: clamp(0.9rem, 2vw, 1rem); /* Tamaño de fuente adaptable */
 }
 
+/**
+ * Pseudo-elemento utilizado como subrayado animado
+ * Comienza oculto (anchura 0) y se anima en hover o estado activo
+ */
 .nav-link::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background: var(--color-principal);
-  transition: var(--transicion);
-  transform: translateX(-50%);
+  content: ""; /* Elemento decorativo */
+  position: absolute; /* Posicionado respecto al enlace */
+  bottom: 0; /* Ubicado en la parte inferior */
+  left: 50%; /* Centrado horizontal */
+  width: 0; /* Inicialmente invisible */
+  height: 2px; /* Grosor del subrayado */
+  background: var(--color-principal); /* Color principal del proyecto */
+  transition: var(--transicion); /* Animación progresiva */
+  transform: translateX(-50%); /* Centrado exacto */
 }
 
+/**
+ * Estado hover y activo
+ * El subrayado se expande suavemente para indicar interacción
+ */
 .nav-link:hover::after,
 .nav-link.active::after {
-  width: 80%;
+  width: 80%; /* Subrayado visible y animado */
 }
 
+/**
+ * Efecto visual al pasar el cursor
+ * Cambio suave de color y fondo para reforzar el feedback
+ */
 .nav-link:hover {
-  color: var(--color-principal) !important;
-  background-color: rgba(98, 167, 251, 0.1);
+  color: var(--color-principal) !important; /* Cambio de color progresivo */
+  background-color: rgba(98, 167, 251, 0.1); /* Fondo sutil sin brusquedad */
 }
 
 /* Estrella */
@@ -136,7 +154,7 @@ a.btn-registrar {
   padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 30px);
   border-radius: 15px;
   background-color: rgba(98, 167, 251, 0.2);
-  animation: pulse 2s infinite;
+  animation: logoPulse 2.5s ease-in-out infinite;
 }
 
 a.btn-registrar:hover {
@@ -178,18 +196,6 @@ a.btn-registrar:hover {
 
 .icon-play:hover {
   animation: none;
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 15px #e8ddcc);
-  }
-  50% {
-    transform: scale(1.1);
-    filter: drop-shadow(0 0 25px #f4d79b);
-  }
 }
 
 .hero-title {
@@ -849,4 +855,23 @@ footer p {
     transform: scale(1.1);
     filter: brightness(1.2);
   }
+}
+
+/* Animación del logo */
+
+@keyframes logoPulse {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 10px rgba(98, 167, 251, 0.6));
+  } /* el logo comienza con su tamaño normal y un resplandor suave */
+
+  50% {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 20px rgba(98, 167, 251, 0.9));
+  } /* a mitad de la animación, el logo se agranda un poco y el resplandor se intensifica */
+
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 10px rgba(98, 167, 251, 0.6));
+  } /* el logo vuelve a su tamaño original y el resplandor se suaviza nuevamente */
 }
