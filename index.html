@@ -27,9 +27,15 @@
       sizes="32x32"
       href="imagenes/letra-z.png"
     />
+
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
   </head>
   <body>
-    <!-- NAV -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
       <div class="container-fluid px-4">
         <a class="navbar-brand" href="#">
@@ -71,15 +77,12 @@
               <img src="imagenes/img.png" alt="Avatar" class="hero-avatar" />
             </li>
             <li class="nav-item ms-2">
-              <button id="nav-acceder" class="btn btn-crear-cuenta">
-                Acceder
-              </button>
+              <button id="nav-acceder" class="btn btn-acceder">Acceder</button>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-    <!-- HERO SECTION -->
     <section class="hero-section">
       <div class="container">
         <div class="icon-play">
@@ -96,12 +99,44 @@
         </div>
       </div>
     </section>
-    <!-- MAIN -->
     <main class="container my-5">
       <div class="row">
-        <!-- LISTA -->
         <div class="col-lg-3 col-md-4 mb-4">
           <div class="sidebar-lista">
+            <div
+              id="caja-favoritos"
+              class="mb-4 p-3 rounded"
+              style="background-color: #1a1a1a; border: 1px solid #333"
+            >
+              <h4
+                class="text-primary mb-3"
+                style="
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  font-size: 1.1rem;
+                  color: chocolate !important;
+                "
+              >
+                <i
+                  class="bi bi-star-fill me-2 text-warning"
+                ></i
+                ><span data-i18n="sidebar-fav"></span>
+              </h4>
+              <div class="input-group mb-3">
+                <input
+                  type="text"
+                  id="input-fav"
+                  class="form-control form-control-sm bg-dark text-white border-secondary"
+                  placeholder="Ej: Bleach"
+                />
+                <button id="btn-add-fav" class="btn btn-primary btn-sm">
+                  <span data-i18n="btn-add-fav"></span>Añadir</span>
+                </button>
+              </div>
+              <ul id="lista-favs" class="list-group"></ul>
+            </div>
+
             <h3 id="sidebar-title">Últimos Episodios - Películas</h3>
             <div class="list-group">
               <div class="list-group-item" id="sidebar-ep1">
@@ -146,10 +181,9 @@
             </div>
           </div>
         </div>
-        <!-- TARJETAS DE ANIME -->
+
         <div class="col-lg-9 col-md-8" id="Episodios">
           <div class="row g-4">
-            <!-- CARD 1 -->
             <div class="col-lg-4 col-md-4 col-sm-6">
               <div class="card anime-card h-100">
                 <div class="card-img-wrapper">
@@ -176,7 +210,6 @@
                 </div>
               </div>
             </div>
-            <!-- CARD 2 -->
             <div class="col-lg-4 col-md-4 col-sm-6">
               <div class="card anime-card h-100">
                 <div class="card-img-wrapper">
@@ -203,7 +236,6 @@
                 </div>
               </div>
             </div>
-            <!-- CARD 3 -->
             <div class="col-lg-4 col-md-4 col-sm-6">
               <div class="card anime-card h-100">
                 <div class="card-img-wrapper">
@@ -231,7 +263,6 @@
                 </div>
               </div>
             </div>
-            <!-- CARD 4 -->
             <div class="col-lg-4 col-md-4 col-sm-6">
               <div class="card anime-card h-100">
                 <div class="card-img-wrapper">
@@ -258,7 +289,6 @@
                 </div>
               </div>
             </div>
-            <!-- CARD 5 -->
             <div class="col-lg-4 col-md-4 col-sm-6">
               <div class="card anime-card h-100">
                 <div class="card-img-wrapper">
@@ -286,7 +316,6 @@
                 </div>
               </div>
             </div>
-            <!-- CARD 6 -->
             <div class="col-lg-4 col-md-4 col-sm-6">
               <div class="card anime-card h-100">
                 <div class="card-img-wrapper">
@@ -314,7 +343,6 @@
                 </div>
               </div>
             </div>
-            <!-- CARD 7 -->
             <div class="col-lg-4 col-md-4 col-sm-6">
               <div class="card anime-card h-100">
                 <div class="card-img-wrapper">
@@ -341,7 +369,6 @@
                 </div>
               </div>
             </div>
-            <!-- CARD 8 -->
             <div class="col-lg-4 col-md-4 col-sm-6">
               <div class="card anime-card h-100">
                 <div class="card-img-wrapper">
@@ -366,7 +393,6 @@
                 </div>
               </div>
             </div>
-            <!-- CARD 9 -->
             <div class="col-lg-4 col-md-4 col-sm-6">
               <div class="card anime-card h-100">
                 <div class="card-img-wrapper">
@@ -408,7 +434,6 @@
                 ></i>
                 <span id="welcome-message">¡Bienvenidos!</span>
               </h2>
-
               <div class="video-container mt-4 rounded overflow-hidden">
                 <video
                   controls
@@ -426,7 +451,6 @@
         </div>
       </section>
 
-      <!-- Sobre el autor -->
       <section class="mt-5 mb-5" id="sobre-mi">
         <div class="container">
           <div class="row justify-content-center">
@@ -441,7 +465,6 @@
                       style="max-width: 90px; border-width: 3px !important"
                     />
                   </div>
-
                   <div class="col-md-9">
                     <h2
                       class="contacto-titulo text-start mt-0 mb-3"
@@ -449,7 +472,6 @@
                     >
                       <span id="about-title">Sobre la Página</span>
                     </h2>
-
                     <p
                       class="mb-4 text-white text-start"
                       style="
@@ -466,7 +488,6 @@
                         ¡Disfrútalos!
                       </span>
                     </p>
-
                     <div
                       class="audio-container p-3 rounded shadow-sm"
                       style="
@@ -512,11 +533,9 @@
         </div>
       </section>
 
-      <!-- CONTACTOS -->
       <section class="contacto-section" id="contacto">
         <h2 id="contact-title" class="contacto-titulo">Contáctanos</h2>
         <div class="row g-4">
-          <!-- Formulario -->
           <div class="col-lg-6">
             <div class="contact-box">
               <h3>
@@ -579,7 +598,6 @@
               </form>
             </div>
           </div>
-          <!-- Información de Contacto -->
           <div class="col-lg-6">
             <div class="contact-box info-contacto">
               <h3>
@@ -591,7 +609,7 @@
               </h3>
               <p>
                 <i class="bi bi-envelope me-2"></i>
-                <strong id="contact-email">Email:</strong>
+                <strong id="contact-email-info">Email:</strong>
                 <span>contacto@zanimation.com</span>
               </p>
               <p>
@@ -610,25 +628,22 @@
                   allowfullscreen=""
                   loading="lazy"
                   referrerpolicy="no-referrer-when-downgrade"
-                >
-                </iframe>
+                ></iframe>
               </div>
             </div>
           </div>
         </div>
       </section>
     </main>
-    <!-- FOOTER -->
     <footer>
       <div class="container">
         <div class="row align-items-center">
           <div
             class="col-md-6 d-flex justify-content-center justify-content-md-start"
           >
-            <!-- Selector de idioma -->
             <div class="language-section">
               <p id="footer-copy" class="mb-2">
-                &copy; 2025 Z Animation | Derechos Reservados
+                © 2026 Z Animation | Derechos Reservados
               </p>
               <div class="language-wrapper">
                 <div id="select-language" class="select-language">
@@ -645,7 +660,6 @@
               </div>
             </div>
           </div>
-          <!-- Redes sociales -->
           <div
             class="col-md-6 d-flex justify-content-center justify-content-md-end"
           >
@@ -654,24 +668,23 @@
                 Síguenos en nuestras redes sociales
               </h4>
               <div class="social-icons">
-                <a href="#" title="facebook">
-                  <img src="imagenes/facebook.png" alt="Facebook" />
-                </a>
-                <a href="#" title="instagram">
-                  <img src="imagenes/instagram.png" alt="Instagram" />
-                </a>
-                <a href="#" title="twitter">
-                  <img src="imagenes/twitter.png" alt="Twitter" />
-                </a>
+                <a href="#" title="facebook"
+                  ><img src="imagenes/facebook.png" alt="Facebook"
+                /></a>
+                <a href="#" title="instagram"
+                  ><img src="imagenes/instagram.png" alt="Instagram"
+                /></a>
+                <a href="#" title="twitter"
+                  ><img src="imagenes/twitter.png" alt="Twitter"
+                /></a>
               </div>
             </div>
           </div>
         </div>
       </div>
     </footer>
-    <!-- Script JS -->
     <script src="./JS/language.js"></script>
-    <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./JS/jquery.js"></script>
   </body>
 </html>

@@ -27,6 +27,18 @@ const translations = {
     en: "Latest Episodes",
   },
 
+  "sidebar-fav": {
+    ca: "Els meus favorits",
+    es: "Mis Favoritos",
+    en: "My Favorites",
+  },
+
+  "btn-add-fav": {
+    ca: "Afegir",
+    es: "Añadir",
+    en: "Add",
+  },
+
   // SIDEBAR EPISODIOS
   "sidebar-ep1": {
     ca: "Kimetsu No Yaiba - Episodis",

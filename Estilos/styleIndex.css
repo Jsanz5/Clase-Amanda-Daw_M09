@@ -123,21 +123,19 @@ body {
   transition: var(--transicion);
 }
 
-.btn-crear-cuenta {
+.btn-acceder {
   background: linear-gradient(135deg, var(--color-principal), #97f8e6);
   color: #000;
   font-weight: 700;
   border: none;
   padding: clamp(6px, 2vw, 10px) clamp(12px, 4vw, 24px);
   border-radius: 15px;
-  transition: var(--transicion);
   box-shadow: 0 4px 15px rgba(98, 167, 251, 0.3);
   font-size: clamp(0.75rem, 2vw, 1rem);
   white-space: nowrap;
 }
 
-.btn-crear-cuenta:hover {
-  transform: scale(1.05);
+.btn-acceder:hover {
   box-shadow: 0 6px 25px rgba(151, 248, 230, 0.5);
 }
 
@@ -708,7 +706,7 @@ footer p {
     margin-top: 10px;
   }
 
-  .btn-crear-cuenta {
+  .btn-acceder {
     margin-top: 10px;
     width: 100%;
   }
