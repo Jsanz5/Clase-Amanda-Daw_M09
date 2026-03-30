@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -12,23 +12,46 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@600;700&display=swap"
       rel="stylesheet"
     />
-
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
     />
+    <link rel="stylesheet" href="./estilos/styleIndex.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="imagenes/letra-z.png"
+    />
 
-    <link rel="stylesheet" href="./Estilos/styleIndex.css" />
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+
+    <link rel="stylesheet" href="./css/interactividad_practica13.css" />
+
+    <style>
+      body {
+        overflow-x: hidden;
+      }
+    </style>
   </head>
   <body>
-    <!-- NAV -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
       <div class="container-fluid px-4">
         <a class="navbar-brand" href="#">
-          <img src="imagenes/letra-z.png" alt="Logo Z Animation" />
-          Animation
+          <img src="imagenes/letra-z.png" alt="Logo Z Animation" /> Animation
         </a>
-
         <button
           class="navbar-toggler"
           type="button"
@@ -40,361 +63,681 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto align-items-center">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+              <a
+                id="nav-inicio"
+                class="nav-link active"
+                aria-current="page"
+                href="#"
+                >Inicio</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#Episodios">Episodios</a>
+              <a id="nav-episodios" class="nav-link" href="#Episodios"
+                >Episodios</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#contacto">Contáctanos</a>
+              <a id="nav-contacto" class="nav-link" href="#contacto"
+                >Contáctanos</a
+              >
             </li>
             <li class="nav-item ms-3 d-none d-lg-block">
               <img src="imagenes/img.png" alt="Avatar" class="hero-avatar" />
             </li>
             <li class="nav-item ms-2">
-              <button class="btn btn-crear-cuenta">Acceder</button>
+              <button id="nav-acceder" class="btn btn-acceder">Acceder</button>
             </li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <section class="hero-section">
+    <header class="hero-section">
       <div class="container">
         <div class="icon-play">
           <img src="imagenes/play.png" alt="Play" class="img-fluid" />
         </div>
-        <h1 class="hero-title">Mundo Anime</h1>
-        <p class="hero-subtitle">
+        <h1 id="hero-title" class="hero-title">Mundo Anime</h1>
+        <p id="hero-subtitle" class="hero-subtitle">
           La mayor colección de Animes a demanda del mundo
         </p>
-
         <div class="btn-registrar">
-          <a href="./registrar.html" class="btn-registrar">Regístrate ahora</a>
+          <a id="hero-reg-btn" href="./registrar.html" class="btn-registrar"
+            >Regístrate ahora</a
+          >
         </div>
       </div>
-    </section>
+    </header>
 
-    <!-- MAIN -->
-    <main class="container my-5">
-      <div class="row">
-        <!-- LISTA -->
-        <div class="col-lg-3 col-md-4 mb-4">
-          <div class="sidebar-lista">
-            <h3>Últimos Episodios - Películas</h3>
-            <div class="list-group">
-              <div class="list-group-item">Kimetsu No Yaiba - Episodios</div>
-              <div class="list-group-item">Naruto Shippuden - Episodios</div>
-              <div class="list-group-item">Tokyo Revengers - Episodios</div>
-              <div class="list-group-item">Attack on Titan - Episodios</div>
-              <div class="list-group-item">Chainsaw Man - Episodios</div>
-              <div class="list-group-item">Dragon Ball Super - Episodios</div>
-              <div class="list-group-item">One Piece - Episodios</div>
-              <div class="list-group-item">Lord of Mysteries - Episodios</div>
-              <div class="list-group-item">Death Note - Episodios</div>
-              <div class="list-group-item">Fullmetal Alchemist - Episodios</div>
-              <div class="list-group-item">Hunter x Hunter - Episodios</div>
-              <div class="list-group-item">Jujutsu Kaisen - Episodios</div>
-              <div class="list-group-item">Más Episodios...</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- TARJETAS DE ANIME -->
-        <div class="col-lg-9 col-md-8" id="Episodios">
-          <div class="row g-4">
-            <!-- Card 1 -->
-            <div class="col-lg-4 col-md-4 col-sm-6">
-              <div class="card anime-card h-100">
-                <div class="card-img-wrapper">
-                  <img
-                    src="imagenes/KNY.jpg"
-                    class="card-img-top"
-                    alt="Kimetsu No Yaiba"
-                  />
-                </div>
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">
-                    Kimetsu No Yaiba - Episodio Estreno
-                  </h5>
-                  <p class="card-text flex-grow-1">
-                    Un episodio lleno de acción y emociones.
-                  </p>
-                  <a href="#" class="btn-ver-ahora">Ver ahora</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="col-lg-4 col-md-4 col-sm-6">
-              <div class="card anime-card h-100">
-                <div class="card-img-wrapper">
-                  <img
-                    src="imagenes/attackOnTitan.jpg"
-                    class="card-img-top"
-                    alt="Attack on Titan"
-                  />
-                </div>
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">Attack on Titan - Episodio Estreno</h5>
-                  <p class="card-text flex-grow-1">
-                    Un mundo al borde de la extinción.
-                  </p>
-                  <a href="#" class="btn-ver-ahora">Ver ahora</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="col-lg-4 col-md-4 col-sm-6">
-              <div class="card anime-card h-100">
-                <div class="card-img-wrapper">
-                  <img
-                    src="imagenes/DBZ.jpg"
-                    class="card-img-top"
-                    alt="Dragon Ball Super"
-                  />
-                </div>
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">
-                    Dragon Ball Super - Episodio Estreno
-                  </h5>
-                  <p class="card-text flex-grow-1">
-                    Vuelve Dragon Ball con una nueva serie tras muchos años.
-                  </p>
-                  <a href="#" class="btn-ver-ahora">Ver ahora</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="col-lg-4 col-md-4 col-sm-6">
-              <div class="card anime-card h-100">
-                <div class="card-img-wrapper">
-                  <img
-                    src="imagenes/Naruto.jpg"
-                    class="card-img-top"
-                    alt="Naruto Shippuden"
-                  />
-                </div>
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">
-                    Naruto Shippuden - Episodio Estreno
-                  </h5>
-                  <p class="card-text flex-grow-1">
-                    Momentos decisivos que cambiarán la historia.
-                  </p>
-                  <a href="#" class="btn-ver-ahora">Ver ahora</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 5 -->
-            <div class="col-lg-4 col-md-4 col-sm-6">
-              <div class="card anime-card h-100">
-                <div class="card-img-wrapper">
-                  <img
-                    src="imagenes/JujutsuKaisen.png"
-                    class="card-img-top"
-                    alt="Jujutsu Kaisen"
-                  />
-                </div>
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">Jujutsu Kaisen - Episodio Estreno</h5>
-                  <p class="card-text flex-grow-1">
-                    Así se escribe la leyenda de los hechiceros y del poder que
-                    puede destruirlo todo.
-                  </p>
-                  <a href="#" class="btn-ver-ahora">Ver ahora</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 6 -->
-            <div class="col-lg-4 col-md-4 col-sm-6">
-              <div class="card anime-card h-100">
-                <div class="card-img-wrapper">
-                  <img
-                    src="imagenes/Lord.png"
-                    class="card-img-top"
-                    alt="Lord of Mysteries"
-                  />
-                </div>
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">
-                    Lord of Mysteries - Episodio Estreno
-                  </h5>
-                  <p class="card-text flex-grow-1">
-                    Esta es la leyenda de un potencial ilimitado... y de un
-                    peligro indescriptible.
-                  </p>
-                  <a href="#" class="btn-ver-ahora">Ver ahora</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 7 -->
-            <div class="col-lg-4 col-md-4 col-sm-6">
-              <div class="card anime-card h-100">
-                <div class="card-img-wrapper">
-                  <img
-                    src="imagenes/Tokyo_revengers.jpg"
-                    class="card-img-top"
-                    alt="Tokyo Revengers"
-                  />
-                </div>
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">Tokyo Revengers - Episodio Estreno</h5>
-                  <p class="card-text flex-grow-1">
-                    El protagonista descubre un nuevo poder.
-                  </p>
-                  <a href="#" class="btn-ver-ahora">Ver ahora</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 8 -->
-            <div class="col-lg-4 col-md-4 col-sm-6">
-              <div class="card anime-card h-100">
-                <div class="card-img-wrapper">
-                  <img
-                    src="imagenes/One_Piece.jpg"
-                    class="card-img-top"
-                    alt="One Piece"
-                  />
-                </div>
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">One Piece - Episodio Estreno</h5>
-                  <p class="card-text flex-grow-1">
-                    Embárcate en el viaje de tu vida con One Piece.
-                  </p>
-                  <a href="#" class="btn-ver-ahora">Ver ahora</a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 9 -->
-            <div class="col-lg-4 col-md-4 col-sm-6">
-              <div class="card anime-card h-100">
-                <div class="card-img-wrapper">
-                  <img
-                    src="imagenes/hunterXhunter.jpg"
-                    class="card-img-top"
-                    alt="Hunter x Hunter"
-                  />
-                </div>
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">Hunter x Hunter - Episodio Estreno</h5>
-                  <p class="card-text flex-grow-1">
-                    Acompaña a Gon en su aventura para convertirse en un
-                    legendario Cazador.
-                  </p>
-                  <a href="#" class="btn-ver-ahora">Ver ahora</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CONTACTOS -->
-      <section class="contacto-section" id="contacto">
-        <h2 class="contacto-titulo">Contáctanos</h2>
-
-        <div class="row g-4">
-          <!-- Formulario -->
-          <div class="col-lg-6">
-            <div class="contact-box">
-              <h3>
-                <i class="bi bi-envelope-fill me-2"></i>Formulario de Contacto
-              </h3>
-              <form>
-                <div class="mb-3">
-                  <label for="nombre" class="form-label">Nombre</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="nombre"
-                    placeholder="Tu nombre"
-                    required
-                  />
-                </div>
-
-                <div class="mb-3">
-                  <label for="email" class="form-label"
-                    >Correo Electrónico</label
-                  >
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="email"
-                    placeholder="ejemplo@correo.com"
-                    required
-                  />
-                </div>
-
-                <div class="mb-4">
-                  <label for="mensaje" class="form-label">Mensaje</label>
-                  <textarea
-                    class="form-control"
-                    id="mensaje"
-                    rows="5"
-                    placeholder="Escribe tu mensaje..."
-                    required
-                  ></textarea>
-                </div>
-
-                <div class="d-flex gap-3">
-                  <button type="reset" class="btn btn-form btn-reset flex-fill">
-                    <i class="bi bi-x-circle me-2"></i>Borrar
-                  </button>
-                  <button
-                    type="submit"
-                    class="btn btn-form btn-submit flex-fill"
-                  >
-                    <i class="bi bi-send-fill me-2"></i>Enviar
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-
-          <!-- Información de Contacto -->
-          <div class="col-lg-6">
-            <div class="contact-box info-contacto">
-              <h3>
-                <i
-                  class="bi bi-info-circle-fill me-2"
-                  style="color: #62a7fb"
-                ></i
-                >Información de Contacto
-              </h3>
-              <p>
-                <i class="bi bi-envelope me-2"></i
-                ><strong>Email:</strong> contacto@zanimation.com
-              </p>
-              <p>
-                <i class="bi bi-telephone-fill me-2"></i
-                ><strong>Teléfono:</strong> +34 123 456 789
-              </p>
-              <p>
-                <i class="bi bi-geo-alt-fill me-2"></i
-                ><strong>Dirección:</strong> Calle Anime 123, Tokyo
-              </p>
-
-              <div class="map-container">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.9537353153167!3d-37.81627974202171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d6e5b5f5b5b5!2sFederation%20Square!5e0!3m2!1ses!2sus!4v1614031234567!5m2!1ses!2sus"
-                  allowfullscreen=""
-                  loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"
+    <main>
+      <section class="py-5" id="video-presentacion">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+              <div class="contact-box shadow-sm p-4">
+                <h2
+                  class="contacto-titulo text-center mt-0"
+                  style="font-size: 1.5rem"
                 >
-                </iframe>
+                  <i
+                    class="bi bi-play-circle-fill me-2"
+                    style="color: #62a7fb"
+                  ></i>
+                  <span id="welcome-message">¡Bienvenidos!</span>
+                </h2>
+                <div
+                  class="video-container mt-3 rounded overflow-hidden shadow"
+                >
+                  <video
+                    controls
+                    poster="imagenes/video_poster.jpg"
+                    preload="metadata"
+                    class="w-100"
+                    style="display: block"
+                  >
+                    <source src="video/videoWeb.webm" type="video/webm" />
+                    <source src="video/videoWeb.mp4" type="video/mp4" />
+                    Tu navegador no soporta la reproducción de vídeo.
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-4" id="Episodios">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-4 mb-4">
+              <div class="sidebar-lista">
+                <div
+                  id="caja-favoritos"
+                  class="mb-4 p-3 rounded shadow-sm"
+                  style="background-color: #1a1a1a; border: 1px solid #333"
+                >
+                  <h4
+                    class="text-primary mb-3 text-center"
+                    style="font-size: 1.1rem; color: chocolate !important"
+                  >
+                    <i class="bi bi-star-fill me-2 text-warning"></i>
+                    <span data-i18n="sidebar-fav">Favoritos</span>
+                  </h4>
+                  <div class="input-group mb-3">
+                    <input
+                      type="text"
+                      id="input-fav"
+                      class="form-control form-control-sm bg-dark text-white border-secondary"
+                      placeholder="Ej: Bleach"
+                    />
+                    <button id="btn-add-fav" class="btn btn-primary btn-sm">
+                      <span data-i18n="btn-add-fav">Añadir</span>
+                    </button>
+                  </div>
+                  <ul id="lista-favs" class="list-group"></ul>
+                </div>
+
+                <h3 id="sidebar-title">Últimos Episodios - Películas</h3>
+                <div class="list-group shadow-sm">
+                  <div class="list-group-item" id="sidebar-ep1">
+                    Kimetsu No Yaiba - Episodios
+                  </div>
+                  <div class="list-group-item" id="sidebar-ep2">
+                    Naruto Shippuden - Episodios
+                  </div>
+                  <div class="list-group-item" id="sidebar-ep3">
+                    Tokyo Revengers - Episodios
+                  </div>
+                  <div class="list-group-item" id="sidebar-ep4">
+                    Attack on Titan - Episodios
+                  </div>
+                  <div class="list-group-item" id="sidebar-ep5">
+                    Chainsaw Man - Episodios
+                  </div>
+                  <div class="list-group-item" id="sidebar-ep6">
+                    Dragon Ball Super - Episodios
+                  </div>
+                  <div class="list-group-item" id="sidebar-ep7">
+                    One Piece - Episodios
+                  </div>
+                  <div class="list-group-item" id="sidebar-ep8">
+                    Lord of Mysteries - Episodios
+                  </div>
+                  <div class="list-group-item" id="sidebar-ep9">
+                    Death Note - Episodios
+                  </div>
+                  <div class="list-group-item" id="sidebar-ep10">
+                    Fullmetal Alchemist - Episodios
+                  </div>
+                  <div class="list-group-item" id="sidebar-ep11">
+                    Hunter x Hunter - Episodios
+                  </div>
+                  <div class="list-group-item" id="sidebar-ep12">
+                    Jujutsu Kaisen - Episodios
+                  </div>
+                  <div class="list-group-item" id="sidebar-ep13">
+                    Más Episodios...
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-9 col-md-8">
+              <div class="row g-4">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <div class="card anime-card h-100 shadow-sm">
+                    <div class="card-img-wrapper">
+                      <img
+                        src="imagenes/KNY.jpg"
+                        class="card-img-top"
+                        alt="Kimetsu No Yaiba"
+                      />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                      <h5 class="card-title">
+                        <span id="ep-1-title"
+                          >Kimetsu No Yaiba - Episodio Estreno</span
+                        >
+                      </h5>
+                      <p class="card-text flex-grow-1">
+                        <span id="ep-1-desc"
+                          >Un episodio lleno de acción y emociones.</span
+                        >
+                      </p>
+                      <a href="#" class="btn-ver-ahora mt-auto"
+                        ><span data-i18n="btn-watch">Ver ahora</span></a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <div class="card anime-card h-100 shadow-sm">
+                    <div class="card-img-wrapper">
+                      <img
+                        src="imagenes/attackOnTitan.jpg"
+                        class="card-img-top"
+                        alt="Attack on Titan"
+                      />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                      <h5 class="card-title">
+                        <span id="ep-2-title"
+                          >Attack on Titan - Episodio Estreno</span
+                        >
+                      </h5>
+                      <p class="card-text flex-grow-1">
+                        <span id="ep-2-desc"
+                          >Un mundo al borde de la extinción.</span
+                        >
+                      </p>
+                      <a href="#" class="btn-ver-ahora mt-auto"
+                        ><span data-i18n="btn-watch">Ver ahora</span></a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <div class="card anime-card h-100 shadow-sm">
+                    <div class="card-img-wrapper">
+                      <img
+                        src="imagenes/DBZ.jpg"
+                        class="card-img-top"
+                        alt="Dragon Ball Super"
+                      />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                      <h5 class="card-title">
+                        <span id="ep-3-title"
+                          >Dragon Ball Super - Episodio Estreno</span
+                        >
+                      </h5>
+                      <p class="card-text flex-grow-1">
+                        <span id="ep-3-desc"
+                          >Vuelve Dragon Ball con una nueva serie tras muchos
+                          años.</span
+                        >
+                      </p>
+                      <a href="#" class="btn-ver-ahora mt-auto"
+                        ><span data-i18n="btn-watch">Ver ahora</span></a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <div class="card anime-card h-100 shadow-sm">
+                    <div class="card-img-wrapper">
+                      <img
+                        src="imagenes/Naruto.jpg"
+                        class="card-img-top"
+                        alt="Naruto Shippuden"
+                      />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                      <h5 class="card-title">
+                        <span id="ep-4-title"
+                          >Naruto Shippuden - Episodio Estreno</span
+                        >
+                      </h5>
+                      <p class="card-text flex-grow-1">
+                        <span id="ep-4-desc"
+                          >Momentos decisivos que cambiarán la historia.</span
+                        >
+                      </p>
+                      <a href="#" class="btn-ver-ahora mt-auto"
+                        ><span data-i18n="btn-watch">Ver ahora</span></a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <div class="card anime-card h-100 shadow-sm">
+                    <div class="card-img-wrapper">
+                      <img
+                        src="imagenes/JujutsuKaisen.png"
+                        class="card-img-top"
+                        alt="Jujutsu Kaisen"
+                      />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                      <h5 class="card-title">
+                        <span id="ep-5-title"
+                          >Jujutsu Kaisen - Episodio Estreno</span
+                        >
+                      </h5>
+                      <p class="card-text flex-grow-1">
+                        <span id="ep-5-desc"
+                          >Así se escribe la leyenda de los hechiceros y del
+                          poder que puede destruirlo todo.</span
+                        >
+                      </p>
+                      <a href="#" class="btn-ver-ahora mt-auto"
+                        ><span data-i18n="btn-watch">Ver ahora</span></a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <div class="card anime-card h-100 shadow-sm">
+                    <div class="card-img-wrapper">
+                      <img
+                        src="imagenes/Lord.png"
+                        class="card-img-top"
+                        alt="Lord of Mysteries"
+                      />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                      <h5 class="card-title">
+                        <span id="ep-6-title"
+                          >Lord of Mysteries - Episodio Estreno</span
+                        >
+                      </h5>
+                      <p class="card-text flex-grow-1">
+                        <span id="ep-6-desc"
+                          >Esta es la leyenda de un potencial ilimitado... y de
+                          un peligro indescriptible.</span
+                        >
+                      </p>
+                      <a href="#" class="btn-ver-ahora mt-auto"
+                        ><span data-i18n="btn-watch">Ver ahora</span></a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <div class="card anime-card h-100 shadow-sm">
+                    <div class="card-img-wrapper">
+                      <img
+                        src="imagenes/Tokyo_revengers.jpg"
+                        class="card-img-top"
+                        alt="Tokyo Revengers"
+                      />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                      <h5 class="card-title">
+                        <span id="ep-7-title"
+                          >Tokyo Revengers - Episodio Estreno</span
+                        >
+                      </h5>
+                      <p class="card-text flex-grow-1">
+                        <span id="ep-7-desc"
+                          >El protagonista descubre un nuevo poder.</span
+                        >
+                      </p>
+                      <a href="#" class="btn-ver-ahora mt-auto"
+                        ><span data-i18n="btn-watch">Ver ahora</span></a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <div class="card anime-card h-100 shadow-sm">
+                    <div class="card-img-wrapper">
+                      <img
+                        src="imagenes/One_Piece.jpg"
+                        class="card-img-top"
+                        alt="One Piece"
+                      />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                      <h5 class="card-title">
+                        <span id="ep-8-title"
+                          >One Piece - Episodio Estreno</span
+                        >
+                      </h5>
+                      <p class="card-text flex-grow-1">
+                        <span id="ep-8-desc"
+                          >Embárcate en el viaje de tu vida con One Piece.</span
+                        >
+                      </p>
+                      <a href="#" class="btn-ver-ahora mt-auto"
+                        ><span data-i18n="btn-watch">Ver ahora</span></a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <div class="card anime-card h-100 shadow-sm">
+                    <div class="card-img-wrapper">
+                      <img
+                        src="imagenes/hunterXhunter.jpg"
+                        class="card-img-top"
+                        alt="Hunter x Hunter"
+                      />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                      <h5 class="card-title">
+                        <span id="ep-9-title"
+                          >Hunter x Hunter - Episodio Estreno</span
+                        >
+                      </h5>
+                      <p class="card-text flex-grow-1">
+                        <span id="ep-9-desc"
+                          >Acompaña a Gon en su aventura para convertirse en un
+                          legendario Cazador.</span
+                        >
+                      </p>
+                      <a href="#" class="btn-ver-ahora mt-auto"
+                        ><span data-i18n="btn-watch">Ver ahora</span></a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-5 js-interact-p13-section" id="estadisticas">
+        <div class="container">
+          <h2 class="contacto-titulo text-center" id="stats-title">
+            <i class="bi bi-bar-chart-fill me-2" style="color: #62a7fb"></i
+            >Estadísticas e Interactividad
+          </h2>
+          <div class="row g-4 mt-2 align-items-stretch">
+            <div class="col-lg-6">
+              <div
+                class="js-interact-p13-card p-4 rounded shadow h-100 d-flex flex-column"
+              >
+                <h4
+                  id="chart-title"
+                  class="text-white text-center mb-4"
+                  style="font-size: 1.1rem"
+                >
+                  Visualizaciones Mensuales por Género
+                </h4>
+                <div
+                  class="js-interact-p13-chart-container flex-grow-1"
+                  style="min-height: 250px"
+                >
+                  <canvas id="js-interact-p13-chart"></canvas>
+                </div>
+                <button
+                  id="js-interact-p13-btn-chart"
+                  class="btn btn-outline-primary mt-4 w-100"
+                >
+                  Cambiar a Gráfico de Líneas
+                </button>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div
+                class="js-interact-p13-card p-4 rounded shadow h-100 d-flex flex-column"
+              >
+                <h4
+                  id="simulator-particles-title"
+                  class="text-white text-center mb-1"
+                  style="font-size: 1.1rem"
+                >
+                  Simulador de Partículas 2D
+                </h4>
+                <p
+                  id="simulator-particles-hint"
+                  class="text-center text-muted mb-3"
+                  style="
+                    font-size: 0.85rem;
+                    color: rgba(255, 255, 255, 0.7) !important;
+                  "
+                >
+                  (Mueve el cursor dentro del recuadro inferior para crear
+                  estelas)
+                </p>
+                <div
+                  class="js-interact-p13-canvas-wrapper flex-grow-1 rounded"
+                  style="
+                    border: 1px dashed rgba(98, 167, 251, 0.3);
+                    min-height: 250px;
+                  "
+                >
+                  <canvas id="js-interact-p13-canvas"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="py-5" id="sobre-mi">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8">
+              <div class="contact-box p-4 shadow-sm">
+                <div class="row align-items-center">
+                  <div class="col-md-3 text-center mb-3 mb-md-0">
+                    <img
+                      src="imagenes/img.png"
+                      alt="Avatar"
+                      class="img-fluid rounded-circle border border-primary shadow"
+                      style="max-width: 100px; border-width: 3px !important"
+                    />
+                  </div>
+                  <div class="col-md-9">
+                    <h2
+                      class="contacto-titulo text-start mt-0 mb-3"
+                      style="font-size: 1.6rem"
+                    >
+                      <span id="about-title">Sobre la Página</span>
+                    </h2>
+                    <p
+                      class="mb-4 text-white text-start"
+                      style="font-size: 0.95rem; line-height: 1.5"
+                    >
+                      <span id="about-content">
+                        ¡Hola! Bienvenido a <strong>Z Animation</strong>. He
+                        creado este espacio para compartir los mejores estrenos
+                        del anime. Podrás encontrar una selección de mis animes
+                        favoritos, con reseñas y enlaces para verlos.
+                        ¡Disfrútalos!
+                      </span>
+                    </p>
+                    <div
+                      class="audio-container p-3 rounded shadow-sm"
+                      style="
+                        background-color: rgba(98, 167, 251, 0.1);
+                        border: 1px solid #62a7fb;
+                      "
+                    >
+                      <div class="d-flex align-items-center gap-2 mb-2">
+                        <i
+                          class="fas fa-headphones text-primary"
+                          style="font-size: 0.8rem"
+                        ></i>
+                        <span
+                          id="about-audio-title"
+                          class="fw-bold text-white"
+                          style="font-size: 0.85rem"
+                          >Escucha nuestra presentación</span
+                        >
+                      </div>
+                      <audio
+                        controls
+                        preload="metadata"
+                        class="w-100 custom-audio"
+                        style="height: 35px"
+                      >
+                        <source
+                          src="audio/presentacion_web.mp3"
+                          type="audio/mpeg"
+                        />
+                        <source
+                          src="audio/presentacion_web.ogg"
+                          type="audio/ogg"
+                        />
+                        Tu navegador no soporta el audio.
+                      </audio>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contacto-section py-5" id="contacto">
+        <div class="container">
+          <h2 id="contact-title" class="contacto-titulo text-center mb-4">
+            Contáctanos
+          </h2>
+          <div class="row justify-content-center align-items-stretch g-4">
+            <div class="col-lg-5 col-md-6">
+              <div class="contact-box shadow-sm h-100 p-4 d-flex flex-column">
+                <h4 style="font-size: 1.2rem; margin-bottom: 15px">
+                  <i class="bi bi-envelope-fill me-2"></i>
+                  <span id="contact-form-title">Formulario de Contacto</span>
+                </h4>
+                <form class="d-flex flex-column flex-grow-1">
+                  <div class="mb-2">
+                    <label
+                      for="nombre"
+                      class="form-label"
+                      style="font-size: 0.9rem"
+                    >
+                      <span id="contact-name">Nombre</span>
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      id="nombre"
+                      placeholder="Tu nombre"
+                      data-placeholder-id="contact-name-placeholder"
+                      required
+                    />
+                  </div>
+                  <div class="mb-2">
+                    <label
+                      for="email"
+                      class="form-label"
+                      style="font-size: 0.9rem"
+                    >
+                      <span id="contact-email">Correo Electrónico</span>
+                    </label>
+                    <input
+                      type="email"
+                      class="form-control form-control-sm"
+                      id="email"
+                      placeholder="ejemplo@correo.com"
+                      data-placeholder-id="contact-email-placeholder"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3 flex-grow-1 d-flex flex-column">
+                    <label
+                      for="mensaje"
+                      class="form-label"
+                      style="font-size: 0.9rem"
+                    >
+                      <span id="contact-message">Mensaje</span>
+                    </label>
+                    <textarea
+                      class="form-control form-control-sm flex-grow-1"
+                      id="mensaje"
+                      placeholder="Escribe tu mensaje..."
+                      data-placeholder-id="contact-message-placeholder"
+                      style="min-height: 100px; resize: none"
+                      required
+                    ></textarea>
+                  </div>
+                  <div class="d-flex gap-2 mt-auto">
+                    <button
+                      type="reset"
+                      class="btn btn-form btn-reset flex-fill btn-sm"
+                    >
+                      <i class="bi bi-x-circle me-1"></i>
+                      <span id="contact-reset">Borrar</span>
+                    </button>
+                    <button
+                      type="submit"
+                      class="btn btn-form btn-submit flex-fill btn-sm"
+                    >
+                      <i class="bi bi-send-fill me-1"></i>
+                      <span id="contact-submit">Enviar</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div class="col-lg-5 col-md-6">
+              <div
+                class="contact-box info-contacto shadow-sm h-100 p-4 d-flex flex-column"
+              >
+                <h4 style="font-size: 1.2rem; margin-bottom: 15px">
+                  <i
+                    class="bi bi-info-circle-fill me-2"
+                    style="color: #62a7fb"
+                  ></i>
+                  <span id="contact-info">Información de Contacto</span>
+                </h4>
+                <p style="font-size: 0.9rem; margin-bottom: 8px">
+                  <i class="bi bi-envelope me-2"></i>
+                  <strong id="contact-email-info">Email:</strong>
+                  contacto@zanimation.com
+                </p>
+                <p style="font-size: 0.9rem; margin-bottom: 8px">
+                  <i class="bi bi-telephone-fill me-2"></i>
+                  <strong id="contact-phone">Teléfono:</strong> +34 123 456 789
+                </p>
+                <p style="font-size: 0.9rem; margin-bottom: 15px">
+                  <i class="bi bi-geo-alt-fill me-2"></i>
+                  <strong id="contact-address">Dirección:</strong> Calle Anime
+                  123, Tokyo
+                </p>
+                <div
+                  class="map-container rounded overflow-hidden shadow-sm flex-grow-1 w-100"
+                  style="min-height: 150px"
+                >
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.9537353153167!3d-37.81627974202171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d6e5b5f5b5b5!2sFederation%20Square!5e0!3m2!1ses!2sus!4v1614031234567!5m2!1ses!2sus"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    style="width: 100%; height: 100%; border: 0"
+                  ></iframe>
+                </div>
               </div>
             </div>
           </div>
@@ -402,29 +745,48 @@
       </section>
     </main>
 
-    <!-- FOOTER -->
     <footer>
       <div class="container">
         <div class="row align-items-center">
-          <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-            <p class="mb-0">&copy; 2025 Z Animation | Derechos Reservados</p>
-          </div>
-
           <div
-            class="col-md-6 d-flex justify-content-center justify-content-md-end"
+            class="col-md-6 d-flex justify-content-center justify-content-md-start"
           >
-            <div class="social-section">
-              <h4 class="mb-3">Síguenos en nuestras redes sociales</h4>
+            <div class="language-section">
+              <p id="footer-copy" class="mb-2">
+                © 2026 Z Animation | Derechos Reservados
+              </p>
+              <div class="language-wrapper">
+                <div id="select-language" class="select-language">
+                  <button class="btn btn-outline-light btn-sm" data-lang="es">
+                    ES
+                  </button>
+                  <button class="btn btn-outline-light btn-sm" data-lang="en">
+                    EN
+                  </button>
+                  <button class="btn btn-outline-light btn-sm" data-lang="ca">
+                    CA
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-md-6 d-flex justify-content-center justify-content-md-end mt-3 mt-md-0"
+          >
+            <div class="social-section text-center text-md-end">
+              <h4 id="social-networks" class="mb-2" style="font-size: 1rem">
+                Síguenos en nuestras redes
+              </h4>
               <div class="social-icons">
-                <a href="#" title="facebook">
-                  <img src="imagenes/facebook.png" alt="Facebook" />
-                </a>
-                <a href="#" title="instagram">
-                  <img src="imagenes/instagram.png" alt="Instagram" />
-                </a>
-                <a href="#" title="twitter">
-                  <img src="imagenes/twitter.png" alt="Twitter" />
-                </a>
+                <a href="#" title="facebook"
+                  ><img src="imagenes/facebook.png" alt="Facebook"
+                /></a>
+                <a href="#" title="instagram"
+                  ><img src="imagenes/instagram.png" alt="Instagram"
+                /></a>
+                <a href="#" title="twitter"
+                  ><img src="imagenes/twitter.png" alt="Twitter"
+                /></a>
               </div>
             </div>
           </div>
@@ -432,7 +794,10 @@
       </div>
     </footer>
 
-    <!-- Bootstrap -->
+    <script src="./js/language.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./js/jquery.js"></script>
+
+    <script src="./js/interactividad_practica13.js"></script>
   </body>
 </html>
