@@ -24,37 +24,100 @@ html {
 }
 
 body {
-  position: relative;
-  overflow-x: hidden;
-  background: black; /* Fondo negro base */
-  color: whitesmoke;
   font-family: "Poppins", sans-serif;
-  line-height: 1.6;
+  background-color: #000;
+  color: whitesmoke;
+  line-height: 1.6; /* para que las líneas no estén todas pegadas */
+  position: relative;
+  isolation: isolate;
 }
 
-/* Pa la capa del fondo difuso fijo */
+/* Fondo abstracto moderno sin imagen */
 body::before {
   content: "";
   position: fixed;
+  inset: -12%;
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(98, 167, 251, 0.28),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 82% 18%,
+      rgba(207, 118, 9, 0.24),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 50% 78%,
+      rgba(85, 120, 190, 0.2),
+      transparent 48%
+    ),
+    linear-gradient(160deg, #0a0f1d 0%, #101826 45%, #111111 100%);
+  filter: blur(10px);
+  transform: scale(1.04);
+  z-index: -2;
+}
+
+/* Capa de contraste suave para legibilidad */
+body::after {
+  content: "";
+  position: fixed;
   inset: 0;
-  background-image: url(../imagenes/fondo_exportado.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover; /* para llenar bien el fondo */
-  filter: blur(15px) brightness(0.3); /* efecto blur y algo pa oscurecer un poquito*/
+  background: linear-gradient(
+    to bottom,
+    rgba(3, 5, 10, 0.45),
+    rgba(3, 5, 10, 0.58)
+  );
   z-index: -1;
-  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  body::before {
+    inset: -8%;
+    filter: blur(7px);
+    transform: scale(1.02);
+  }
 }
 
 /****************************************************************/
 /* NAV - RESPONSIVE */
 .navbar {
-  background-color: rgba(68, 68, 74, 0.95) !important;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-radius: 0 0 15px 15px;
-  padding: 10px 5px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(
+    120deg,
+    rgba(25, 30, 45, 0.82),
+    rgba(18, 20, 30, 0.78)
+  ) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 0 0 18px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: none;
+  padding: 10px 8px;
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.35),
+    0 1px 0 rgba(255, 255, 255, 0.08) inset;
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+.navbar::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(98, 167, 251, 0),
+    rgba(98, 167, 251, 0.9),
+    rgba(207, 118, 9, 0.85),
+    rgba(98, 167, 251, 0)
+  );
+  pointer-events: none;
 }
 
 .navbar-brand {
@@ -62,49 +125,81 @@ body::before {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: clamp(2.5rem, 5vw, 2rem);
+  font-size: clamp(1.6rem, 4.4vw, 2.2rem);
   color: var(--color-acento) !important;
   font-weight: 700;
   transition: var(--transicion);
+  letter-spacing: 0.2px;
+  text-shadow: 0 2px 14px rgba(207, 118, 9, 0.25);
 }
 
 .navbar-brand img {
   width: clamp(35px, 10vw, 50px);
   height: clamp(35px, 10vw, 50px);
   border-radius: 12px;
-  transition: var(--transicion);
+  animation: logoPulse 2.5s ease-in-out infinite;
 }
 
+/** 
+ * Estilos base de los enlaces de navegación
+ * Se define el aspecto inicial y se aplica una transición
+ * para suavizar cualquier cambio visual (color, fondo, etc.)
+ */
 .nav-link {
-  color: white !important;
-  font-weight: 600;
-  padding: 8px 12px !important;
-  border-radius: 10px;
-  transition: var(--transicion);
-  margin: 2px 0;
-  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: white !important; /* Color base del enlace */
+  font-weight: 600; /* Texto ligeramente más grueso */
+  padding: 9px 14px !important; /* Espaciado interno */
+  border-radius: 12px; /* Bordes redondeados */
+  transition: var(--transicion); /* Transición suave para los cambios */
+  margin: 2px 0; /* Separación vertical entre enlaces */
+  font-size: clamp(0.9rem, 2vw, 1rem); /* Tamaño de fuente adaptable */
+  position: relative;
+  border: 1px solid transparent;
 }
 
+/**
+ * Pseudo-elemento utilizado como subrayado animado
+ * Comienza oculto (anchura 0) y se anima en hover o estado activo
+ */
 .nav-link::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background: var(--color-principal);
-  transition: var(--transicion);
-  transform: translateX(-50%);
+  content: ""; /* Elemento decorativo */
+  position: absolute; /* Posicionado respecto al enlace */
+  bottom: 0; /* Ubicado en la parte inferior */
+  left: 50%; /* Centrado horizontal */
+  width: 0; /* Inicialmente invisible */
+  height: 2px; /* Grosor del subrayado */
+  background: var(--color-principal); /* Color principal del proyecto */
+  transition: var(--transicion); /* Animación progresiva */
+  transform: translateX(-50%); /* Centrado exacto */
 }
 
+/**
+ * Estado hover y activo
+ * El subrayado se expande suavemente para indicar interacción
+ */
 .nav-link:hover::after,
 .nav-link.active::after {
-  width: 80%;
+  width: 80%; /* Subrayado visible y animado */
 }
 
+/**
+ * Efecto visual al pasar el cursor
+ * Cambio suave de color y fondo para reforzar el feedback
+ */
 .nav-link:hover {
-  color: var(--color-principal) !important;
-  background-color: rgba(98, 167, 251, 0.1);
+  color: var(--color-principal) !important; /* Cambio de color progresivo */
+  background-color: rgba(98, 167, 251, 0.12); /* Fondo sutil sin brusquedad */
+  border-color: rgba(98, 167, 251, 0.35);
+}
+
+.nav-link.active {
+  color: #d8ecff !important;
+  background: linear-gradient(
+    135deg,
+    rgba(98, 167, 251, 0.28),
+    rgba(98, 167, 251, 0.14)
+  );
+  border-color: rgba(98, 167, 251, 0.45);
 }
 
 /* Estrella */
@@ -115,22 +210,36 @@ body::before {
   transition: var(--transicion);
 }
 
-.btn-crear-cuenta {
-  background: linear-gradient(135deg, var(--color-principal), #97f8e6);
+.btn-acceder {
+  background: linear-gradient(135deg, #63adff, #7de7ff 55%, #9bf3ff);
   color: #000;
   font-weight: 700;
   border: none;
   padding: clamp(6px, 2vw, 10px) clamp(12px, 4vw, 24px);
-  border-radius: 15px;
-  transition: var(--transicion);
-  box-shadow: 0 4px 15px rgba(98, 167, 251, 0.3);
+  border-radius: 999px;
+  box-shadow:
+    0 6px 18px rgba(98, 167, 251, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.35) inset;
   font-size: clamp(0.75rem, 2vw, 1rem);
   white-space: nowrap;
 }
 
-.btn-crear-cuenta:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 25px rgba(151, 248, 230, 0.5);
+.btn-acceder:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 10px 26px rgba(151, 248, 230, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+}
+
+.navbar-toggler {
+  border: 1px solid rgba(98, 167, 251, 0.45) !important;
+  background: rgba(98, 167, 251, 0.1);
+  border-radius: 12px;
+  padding: 6px 10px;
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 0.2rem rgba(98, 167, 251, 0.28);
 }
 
 a.btn-registrar {
@@ -146,7 +255,7 @@ a.btn-registrar {
   padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 30px);
   border-radius: 15px;
   background-color: rgba(98, 167, 251, 0.2);
-  animation: pulse 2s infinite;
+  animation: logoPulse 2.5s ease-in-out infinite;
 }
 
 a.btn-registrar:hover {
@@ -188,18 +297,6 @@ a.btn-registrar:hover {
 
 .icon-play:hover {
   animation: none;
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 15px #e8ddcc);
-  }
-  50% {
-    transform: scale(1.1);
-    filter: drop-shadow(0 0 25px #f4d79b);
-  }
 }
 
 .hero-title {
@@ -627,6 +724,29 @@ footer p {
   box-shadow: 0 5px 15px rgba(98, 167, 251, 0.4);
 }
 
+.language-section {
+  display: flex;
+  flex-direction: column; /* TEXTO ARRIBA, BOTONES ABAJO */
+  align-items: center; /* CENTRA COMO LAS REDES */
+}
+
+@media (min-width: 768px) {
+  .language-section {
+    align-items: flex-start; /* desktop igual que redes */
+  }
+}
+
+.language-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.select-language {
+  display: flex;
+  gap: 10px;
+}
+
 /****************************************************************/
 /* SPACING RESPONSIVE */
 
@@ -679,17 +799,25 @@ footer p {
   }
 
   .navbar {
-    padding: 8px 5px;
+    padding: 8px 6px;
+    border-radius: 0 0 14px 14px;
   }
 
   .navbar-collapse {
-    background: rgba(0, 0, 0, 0.8);
+    background: linear-gradient(
+      160deg,
+      rgba(16, 22, 35, 0.9),
+      rgba(12, 14, 22, 0.9)
+    );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(98, 167, 251, 0.22);
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 14px;
     margin-top: 10px;
   }
 
-  .btn-crear-cuenta {
+  .btn-acceder {
     margin-top: 10px;
     width: 100%;
   }
@@ -703,9 +831,16 @@ footer p {
 /* Tablets (481px - 768px) */
 @media (min-width: 481px) and (max-width: 768px) {
   .navbar-collapse {
-    background: rgba(0, 0, 0, 0.7);
+    background: linear-gradient(
+      160deg,
+      rgba(16, 22, 35, 0.86),
+      rgba(12, 14, 22, 0.86)
+    );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(98, 167, 251, 0.2);
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 14px;
     margin-top: 10px;
   }
 }
@@ -763,12 +898,6 @@ footer p {
   }
 }
 
-@media (min-width: 992px) {
-  body::before {
-    filter: blur(100px) brightness(0.3);
-  }
-}
-
 /*-------------------------
        EJERCICIO 6.3 
 -------------------------*/
@@ -807,4 +936,58 @@ footer p {
   .anime-card img {
     height: 150px;
   }
+
+  /****************************************************************/
+  /* SECCIÓN SOBRE MÍ - AJUSTES GLOBALES (Fase 4) */
+
+  #sobre-mi {
+    display: block;
+    clear: both;
+    margin-top: 100px !important; /* Margen superior amplio */
+    margin-bottom: 60px !important; /* Margen inferior */
+    padding-top: 20px;
+    text-align: left;
+  }
+
+  /* diseño del reproductor para que no se vea tan gris */
+  .custom-audio {
+    filter: invert(15%) hue-rotate(180deg) brightness(1.2);
+    border-radius: 50px;
+    background: var(--color-principal);
+  }
+
+  /* Estilos de botones de audio que pide la práctica */
+  .audio-control-btn {
+    background-color: var(--color-principal);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    transition: var(--transicion);
+  }
+
+  .audio-control-btn:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+  }
+}
+
+/* Animación del logo */
+
+@keyframes logoPulse {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 10px rgba(98, 167, 251, 0.6));
+  } /* el logo comienza con su tamaño normal y un resplandor suave */
+
+  50% {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 20px rgba(98, 167, 251, 0.9));
+  } /* a mitad de la animación, el logo se agranda un poco y el resplandor se intensifica */
+
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 10px rgba(98, 167, 251, 0.6));
+  } /* el logo vuelve a su tamaño original y el resplandor se suaviza nuevamente */
 }

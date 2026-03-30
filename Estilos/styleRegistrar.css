@@ -1,191 +1,219 @@
-/* Configuración Base */
-html {
-  scroll-behavior: smooth;
+/* Estilos adicionales para la página de registro */
+.registro-form-container {
+  max-width: 500px;
+  margin: 0 auto;
 }
 
-/* Variables Globales */
-:root {
-  --color-principal: #62a7fb;
-  --color-acento: #cf7609;
-  --color-texto: whitesmoke;
-  --transicion: 0.3s ease;
-  --color-fondo-caja: rgba(255, 255, 255, 0.059);
-  --sombra-caja: 0 10px 40px rgba(0, 0, 0, 0.3);
+.registro-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 50px 35px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: 0.3s ease;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.registro-card:hover {
+  box-shadow: 0 12px 50px rgba(98, 167, 251, 0.2);
+  border: 1px solid rgba(98, 167, 251, 0.3);
 }
 
-body {
-  font-family: "Poppins", sans-serif;
-  background-color: #000;
-  color: whitesmoke;
-  line-height: 1.6;
-  background-image: url("../imagenes/fondo.jpg");
-  background-repeat: no-repeat;
-  background-size: cover; /* Cambiado a cover para un mejor fondo */
-  background-position: center;
-  background-attachment: fixed;
+.registro-titulo-main {
+  font-family: "TypoComics", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #cf7609;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 15px;
+  animation: fadeInDown 1s ease;
+}
+
+.registro-subtitle-main {
+  font-size: 1.1rem;
+  color: #62a7fb;
+  margin-bottom: 40px;
+  animation: fadeInUp 1s ease;
+}
+
+.form-group {
+  margin-bottom: 25px;
   position: relative;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-/* Overlay para desenfoque y oscurecimiento del fondo */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(80px);
-  z-index: -1;
-}
-
-/* Aseguro el centrado y la altura mínima */
-.registro-section {
-  width: 100%;
-  max-width: 900px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-}
-
-/* Título de la sección */
-.registro-titulo {
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: bold;
-  color: var(--color-acento);
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-  text-align: center;
-}
-
-.registro-section p {
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  background-color: rgba(98, 167, 251, 0.2);
-  padding: 8px 25px;
-  border-radius: 12px;
-  color: var(--color-principal);
-  box-shadow: #62a7fb 0px 0px 10px;
-  box-shadow: 0 0 10px rgba(98, 167, 251, 0.3);
-  justify-content: center;
-  margin-top: 10px;
-  text-align: center;
-}
-
-.contact-box {
-  padding: clamp(20px, 4vw, 30px);
-  transition: transform var(--transicion);
-}
-
-.contact-box:hover {
-  transform: translateY(-3px);
-}
-
-/* Etiquetas */
-.form-label {
-  color: var(--color-texto);
-  font-weight: 500;
-  margin-bottom: 8px;
-  font-size: clamp(0.85rem, 2vw, 1rem);
-}
-
-/* Inputs y Textareas*/
-.form-control {
-  background-color: transparent;
-  border: none;
-  border-bottom: 2px solid #ffffff38;
-  color: white !important;
-  padding: 10px 0 10px 5px; /* acá este padding izquierdo es pa alinear el texto con la etiqueta */
-  border-radius: 0;
-  transition: border-color var(--transicion), box-shadow var(--transicion);
-  font-size: clamp(0.85rem, 2vw, 1rem);
-  width: 100%;
-  text-align: left !important;
-}
-
-.form-control:focus {
-  background-color: transparent;
-  border-color: var(--color-principal);
-  box-shadow: none;
-  outline: none;
-}
-
-.form-control::placeholder {
-  color: rgba(255, 255, 255, 0.7);
-  text-align: center;
-}
-
-/* Contenedor de Botones */
-.d-flex.gap-3 {
-  margin-top: clamp(15px, 4vw, 25px);
-}
-
-/* Estilos de Botones Generales */
-.btn-form {
-  padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 30px);
-  border-radius: 12px;
+.form-label-registro {
+  display: block;
+  color: #62a7fb;
   font-weight: 600;
-  transition: var(--transicion);
-  border: none;
-  font-size: clamp(0.85rem, 2vw, 1rem);
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-input-registro {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(98, 167, 251, 0.3);
+  border-radius: 12px;
+  padding: 14px 18px;
+  color: white;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  transition: 0.3s ease;
   width: 100%;
 }
 
-/* Botón de Registrarse*/
-.btn-submit {
-  background: linear-gradient(135deg, var(--color-principal), #97f8e6);
+.form-input-registro::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.form-input-registro:focus {
+  outline: none;
+  background: rgba(98, 167, 251, 0.1);
+  border-color: #62a7fb;
+  box-shadow: 0 0 15px rgba(98, 167, 251, 0.3);
+}
+
+.btn-registro {
+  background: linear-gradient(135deg, #62a7fb 0%, #cf7609 100%);
+  border: none;
+  color: white;
+  padding: 14px 35px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border-radius: 12px;
+  width: 100%;
+  cursor: pointer;
+  transition: 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 20px;
+}
+
+.btn-registro:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(98, 167, 251, 0.4);
+}
+
+.btn-registro:active {
+  transform: translateY(-1px);
+}
+
+.link-login {
+  text-align: center;
+  margin-top: 25px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.link-login a {
+  color: #62a7fb;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.link-login a:hover {
+  color: #cf7609;
+  text-decoration: underline;
+}
+
+.language-selector-registrar {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.language-selector-registrar .btn {
+  background: rgba(98, 167, 251, 0.2);
+  border: 2px solid #62a7fb !important;
+  color: #62a7fb;
+  font-weight: 600;
+  transition: 0.3s ease;
+  margin-left: 8px;
+}
+
+.language-selector-registrar .btn:hover {
+  background: #62a7fb;
   color: #000;
 }
 
-.btn-submit:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 20px rgba(151, 248, 230, 0.5);
+.registro-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
 }
 
-/* Media Query pa asegurar que los botones se vean bien en móvil */
-@media (max-width: 576px) {
-  .d-flex.gap-3 {
-    flex-direction: column;
+.header-registro {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.icon-lock {
+  font-size: 4rem;
+  color: #62a7fb;
+  margin-bottom: 20px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
   }
-  .d-flex.gap-3 .btn-form {
-    margin-bottom: 10px; /* Espacio adicional en móvil */
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* ESTILOS DE SPACING Y UTILITIES  */
-.my-5 {
-  margin-top: clamp(1.5rem, 4vw, 3rem) !important;
-  margin-bottom: clamp(1.5rem, 4vw, 3rem) !important;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.mb-4 {
-  margin-bottom: clamp(1rem, 3vw, 1.5rem) !important;
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }
 
-/* SCROLLBAR  */
-::-webkit-scrollbar {
-  width: 8px;
+.form-input-registro.filled {
+  background: rgba(98, 167, 251, 0.15);
+  border-color: #62a7fb;
 }
 
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.5);
-}
+@media (max-width: 768px) {
+  .registro-card {
+    padding: 35px 25px;
+  }
 
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    180deg,
-    var(--color-principal),
-    var(--color-acento)
-  );
-  border-radius: 10px;
-}
+  .registro-titulo-main {
+    font-size: 2rem;
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #97f8e6, var(--color-principal));
+  .language-selector-registrar {
+    top: 10px;
+    right: 10px;
+  }
+
+  .language-selector-registrar .btn {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    margin-left: 4px;
+  }
 }
