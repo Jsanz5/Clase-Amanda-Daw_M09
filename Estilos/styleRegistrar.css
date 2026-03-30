@@ -1,0 +1,219 @@
+/* Estilos adicionales para la página de registro */
+.registro-form-container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.registro-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 50px 35px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: 0.3s ease;
+}
+
+.registro-card:hover {
+  box-shadow: 0 12px 50px rgba(98, 167, 251, 0.2);
+  border: 1px solid rgba(98, 167, 251, 0.3);
+}
+
+.registro-titulo-main {
+  font-family: "TypoComics", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #cf7609;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 15px;
+  animation: fadeInDown 1s ease;
+}
+
+.registro-subtitle-main {
+  font-size: 1.1rem;
+  color: #62a7fb;
+  margin-bottom: 40px;
+  animation: fadeInUp 1s ease;
+}
+
+.form-group {
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.form-label-registro {
+  display: block;
+  color: #62a7fb;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-input-registro {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(98, 167, 251, 0.3);
+  border-radius: 12px;
+  padding: 14px 18px;
+  color: white;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  transition: 0.3s ease;
+  width: 100%;
+}
+
+.form-input-registro::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.form-input-registro:focus {
+  outline: none;
+  background: rgba(98, 167, 251, 0.1);
+  border-color: #62a7fb;
+  box-shadow: 0 0 15px rgba(98, 167, 251, 0.3);
+}
+
+.btn-registro {
+  background: linear-gradient(135deg, #62a7fb 0%, #cf7609 100%);
+  border: none;
+  color: white;
+  padding: 14px 35px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border-radius: 12px;
+  width: 100%;
+  cursor: pointer;
+  transition: 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 20px;
+}
+
+.btn-registro:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(98, 167, 251, 0.4);
+}
+
+.btn-registro:active {
+  transform: translateY(-1px);
+}
+
+.link-login {
+  text-align: center;
+  margin-top: 25px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.link-login a {
+  color: #62a7fb;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.link-login a:hover {
+  color: #cf7609;
+  text-decoration: underline;
+}
+
+.language-selector-registrar {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.language-selector-registrar .btn {
+  background: rgba(98, 167, 251, 0.2);
+  border: 2px solid #62a7fb !important;
+  color: #62a7fb;
+  font-weight: 600;
+  transition: 0.3s ease;
+  margin-left: 8px;
+}
+
+.language-selector-registrar .btn:hover {
+  background: #62a7fb;
+  color: #000;
+}
+
+.registro-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.header-registro {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.icon-lock {
+  font-size: 4rem;
+  color: #62a7fb;
+  margin-bottom: 20px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.form-input-registro.filled {
+  background: rgba(98, 167, 251, 0.15);
+  border-color: #62a7fb;
+}
+
+@media (max-width: 768px) {
+  .registro-card {
+    padding: 35px 25px;
+  }
+
+  .registro-titulo-main {
+    font-size: 2rem;
+  }
+
+  .language-selector-registrar {
+    top: 10px;
+    right: 10px;
+  }
+
+  .language-selector-registrar .btn {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    margin-left: 4px;
+  }
+}
