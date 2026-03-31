@@ -540,8 +540,7 @@ main {
 /* CONTACTOS - RESPONSIVE */
 
 .contacto-section {
-  margin-top: clamp(40px, 10vw, 80px);
-  padding: clamp(30px, 8vw, 60px) 0;
+  padding: clamp(30px, 8vw, 60px) clamp(10px, 5vw, 20px);
   width: 100%;
 }
 
@@ -943,9 +942,6 @@ footer p {
   #sobre-mi {
     display: block;
     clear: both;
-    margin-top: 100px !important; /* Margen superior amplio */
-    margin-bottom: 60px !important; /* Margen inferior */
-    padding-top: 20px;
     text-align: left;
   }
 

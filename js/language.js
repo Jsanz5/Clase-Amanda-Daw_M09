@@ -271,8 +271,8 @@ const translations = {
   },
 
   "contact-email": {
-    ca: "Correu Electrònic:",
-    es: "Correo Electrónico:",
+    ca: "Email:",
+    es: "Email:",
     en: "Email:",
   },
 
@@ -298,8 +298,8 @@ const translations = {
   },
 
   "contact-email-info": {
-    ca: "Correu Electrònic:",
-    es: "Correo Electrónico:",
+    ca: "Email:",
+    es: "Email:",
     en: "Email:",
   },
   "contact-phone": { ca: "Telèfon:", es: "Teléfono:", en: "Phone:" },
