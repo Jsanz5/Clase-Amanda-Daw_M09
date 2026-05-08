@@ -106,10 +106,8 @@
         transform: translateX(-50%) translateY(0);
       }
 
-      /* Estado: guardado (siempre visible, color ámbar) */
+      /* Estado: guardado (solo visible en hover, color ámbar) */
       .card-bookmark-btn.saved {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
         background: rgba(251, 191, 36, 0.18);
         border-color: rgba(251, 191, 36, 0.55);
         color: #fbbf24;
