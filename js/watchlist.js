@@ -308,30 +308,34 @@
   // ── Traducciones ──────────────────────────────────────────────────────────
   const LABELS = {
     es: {
-      panelTitle:  'Mi Lista',
-      empty:       'Tu lista está vacía',
-      emptyHint:   'Guarda episodios para verlos cuando quieras.',
-      addBtn:      'Agregar a lista',
-      savedBtn:    'Guardado',
+      panelTitle:    'Mi Lista',
+      empty:         'Tu lista está vacía',
+      emptyHint:     'Guarda episodios para verlos cuando quieras.',
+      addBtn:        'Agregar a lista',
+      savedBtn:      'Guardado',
+      loginRequired: 'Inicia sesión para guardar en tu lista',
     },
     ca: {
-      panelTitle:  'La meva llista',
-      empty:       'La teva llista és buida',
-      emptyHint:   "Desa episodis per veure'ls quan vulguis.",
-      addBtn:      'Afegir a la llista',
-      savedBtn:    'Desat',
+      panelTitle:    'La meva llista',
+      empty:         'La teva llista és buida',
+      emptyHint:     "Desa episodis per veure'ls quan vulguis.",
+      addBtn:        'Afegir a la llista',
+      savedBtn:      'Desat',
+      loginRequired: 'Inicia sessió per desar a la teva llista',
     },
     en: {
-      panelTitle:  'My List',
-      empty:       'Your list is empty',
-      emptyHint:   'Save episodes to watch them whenever you want.',
-      addBtn:      'Add to list',
-      savedBtn:    'Saved',
+      panelTitle:    'My List',
+      empty:         'Your list is empty',
+      emptyHint:     'Save episodes to watch them whenever you want.',
+      addBtn:        'Add to list',
+      savedBtn:      'Saved',
+      loginRequired: 'Sign in to save to your list',
     },
   };
 
-  function getLang() { return localStorage.getItem('userLang') || 'es'; }
-  function L(key)    { const l = getLang(); return (LABELS[l] || LABELS.es)[key]; }
+  function getLang()    { return localStorage.getItem('userLang') || 'es'; }
+  function L(key)       { const l = getLang(); return (LABELS[l] || LABELS.es)[key]; }
+  function hasSession() { try { return !!JSON.parse(localStorage.getItem('z_sesion')); } catch { return false; } }
 
   // ── Persistencia ─────────────────────────────────────────────────────────
   function getList()      { try { return JSON.parse(localStorage.getItem('z_watchlist') || '[]'); } catch { return []; } }
@@ -344,52 +348,63 @@
   // ── Inicialización ────────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', function () {
 
-    // — Botón en navbar (solo icono + badge) —
-    const searchItem = document.getElementById('nav-search-item');
-    const navItem = document.createElement('li');
-    navItem.className = 'nav-item ms-2';
-    navItem.id = 'nav-watchlist-item';
-    navItem.innerHTML = `
-      <button class="btn-watchlist-toggle" id="btn-watchlist-toggle" aria-label="Mi lista">
-        <i class="bi bi-bookmark"></i>
-        <span class="watchlist-badge" id="watchlist-badge" style="display:none">0</span>
-      </button>
-    `;
-    if (searchItem?.parentNode) {
-      searchItem.parentNode.insertBefore(navItem, searchItem.nextSibling);
+    // — Botón en navbar y panel: solo con sesión activa —
+    if (hasSession()) {
+      const searchItem = document.getElementById('nav-search-item');
+      const navItem = document.createElement('li');
+      navItem.className = 'nav-item ms-2';
+      navItem.id = 'nav-watchlist-item';
+      navItem.innerHTML = `
+        <button class="btn-watchlist-toggle" id="btn-watchlist-toggle" aria-label="Mi lista">
+          <i class="bi bi-bookmark"></i>
+          <span class="watchlist-badge" id="watchlist-badge" style="display:none">0</span>
+        </button>
+      `;
+      if (searchItem?.parentNode) {
+        searchItem.parentNode.insertBefore(navItem, searchItem.nextSibling);
+      }
+
+      badge = document.getElementById('watchlist-badge');
+
+      const panelEl = document.createElement('div');
+      panelEl.id = 'watchlist-panel';
+      panelEl.innerHTML = `
+        <div class="watchlist-panel-overlay" id="watchlist-panel-overlay"></div>
+        <div class="watchlist-panel-drawer">
+          <div class="watchlist-panel-header">
+            <span class="watchlist-panel-title" id="watchlist-panel-title">${L('panelTitle')}</span>
+            <button class="watchlist-panel-close" id="btn-watchlist-close" aria-label="Cerrar">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </div>
+          <div class="watchlist-panel-body">
+            <div class="watchlist-empty" id="watchlist-empty">
+              <i class="bi bi-bookmark"></i>
+              <p id="watchlist-empty-title">${L('empty')}</p>
+              <p class="watchlist-empty-hint" id="watchlist-empty-hint">${L('emptyHint')}</p>
+            </div>
+            <ul class="watchlist-list" id="watchlist-list"></ul>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(panelEl);
+
+      panelTitle = document.getElementById('watchlist-panel-title');
+      panelList  = document.getElementById('watchlist-list');
+      panelEmpty = document.getElementById('watchlist-empty');
+
+      document.getElementById('btn-watchlist-toggle').addEventListener('click', (e) => {
+        e.stopPropagation();
+        openPanel();
+      });
+      document.getElementById('btn-watchlist-close').addEventListener('click', closePanel);
+      document.getElementById('watchlist-panel-overlay').addEventListener('click', closePanel);
+
+      updateBadge();
+      renderList();
     }
 
-    badge = document.getElementById('watchlist-badge');
-
-    // — Panel drawer —
-    const panelEl = document.createElement('div');
-    panelEl.id = 'watchlist-panel';
-    panelEl.innerHTML = `
-      <div class="watchlist-panel-overlay" id="watchlist-panel-overlay"></div>
-      <div class="watchlist-panel-drawer">
-        <div class="watchlist-panel-header">
-          <span class="watchlist-panel-title" id="watchlist-panel-title">${L('panelTitle')}</span>
-          <button class="watchlist-panel-close" id="btn-watchlist-close" aria-label="Cerrar">
-            <i class="bi bi-x-lg"></i>
-          </button>
-        </div>
-        <div class="watchlist-panel-body">
-          <div class="watchlist-empty" id="watchlist-empty">
-            <i class="bi bi-bookmark"></i>
-            <p id="watchlist-empty-title">${L('empty')}</p>
-            <p class="watchlist-empty-hint" id="watchlist-empty-hint">${L('emptyHint')}</p>
-          </div>
-          <ul class="watchlist-list" id="watchlist-list"></ul>
-        </div>
-      </div>
-    `;
-    document.body.appendChild(panelEl);
-
-    panelTitle = document.getElementById('watchlist-panel-title');
-    panelList  = document.getElementById('watchlist-list');
-    panelEmpty = document.getElementById('watchlist-empty');
-
-    // — Pills de bookmark en tarjetas —
+    // — Pills de bookmark en tarjetas (siempre visibles) —
     document.querySelectorAll('.anime-card').forEach(card => {
       const wrapper = card.querySelector('.card-img-wrapper');
       const img = wrapper?.querySelector('img');
@@ -398,7 +413,7 @@
       const id     = img.getAttribute('src').split('/').pop().replace(/\.[^.]+$/, '');
       const imgSrc = img.getAttribute('src');
       const imgAlt = img.getAttribute('alt') || '';
-      const saved  = isInList(id);
+      const saved  = hasSession() && isInList(id);
 
       const btn = document.createElement('button');
       btn.className = 'card-bookmark-btn' + (saved ? ' saved' : '');
@@ -410,22 +425,18 @@
       btn.addEventListener('click', function (e) {
         e.preventDefault();
         e.stopPropagation();
+        if (!hasSession()) {
+          if (typeof ZNotify !== 'undefined') ZNotify.show({ type: 'warning', title: L('loginRequired'), duration: 3000 });
+          setTimeout(() => { window.location.href = './login.html'; }, 1500);
+          return;
+        }
         const title = card.querySelector('.card-title')?.textContent?.trim() || '';
         toggleItem({ id, title, img: imgSrc, alt: imgAlt }, btn);
       });
     });
 
-    // — Eventos del panel —
-    document.getElementById('btn-watchlist-toggle').addEventListener('click', (e) => {
-      e.stopPropagation();
-      openPanel();
-    });
-    document.getElementById('btn-watchlist-close').addEventListener('click', closePanel);
-    document.getElementById('watchlist-panel-overlay').addEventListener('click', closePanel);
+    // — Eventos globales —
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closePanel(); });
-
-    updateBadge();
-    renderList();
 
     // — Envolver setLanguage —
     const origSetLanguage = window.setLanguage;

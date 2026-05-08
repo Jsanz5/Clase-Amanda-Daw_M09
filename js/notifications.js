@@ -164,7 +164,13 @@
     info:    'bi bi-info-circle-fill',
   };
 
+  function dismissAll() {
+    const container = getContainer();
+    Array.from(container.children).forEach(el => el.remove());
+  }
+
   function showToast({ type = 'info', title = '', message = '', duration = 4200 } = {}) {
+    dismissAll();
     const container = getContainer();
     const toast = document.createElement('div');
     toast.className = `z-toast z-toast-${type}`;
