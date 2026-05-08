@@ -573,13 +573,6 @@
                 <button type="button" class="toggle-pass-btn" data-target="z-pass-nueva" aria-label="Mostrar"><i class="bi bi-eye"></i></button>
               </div>
             </div>
-            <div class="z-panel-field">
-              <label class="z-panel-label" for="z-pass-confirmar" data-i18n="session-label-pass-confirmar">Confirmar nueva contraseña</label>
-              <div class="password-wrapper">
-                <input type="password" class="z-panel-input" id="z-pass-confirmar" placeholder="Repite la nueva contraseña" data-placeholder-id="session-placeholder-pass-confirmar" autocomplete="new-password">
-                <button type="button" class="toggle-pass-btn" data-target="z-pass-confirmar" aria-label="Mostrar"><i class="bi bi-eye"></i></button>
-              </div>
-            </div>
             <button type="submit" class="z-panel-btn-primary">
               <i class="bi bi-shield-check"></i> <span data-i18n="session-actualizar-pass">Actualizar contraseña</span>
             </button>
@@ -655,15 +648,14 @@
     // Cambiar contraseña
     document.getElementById('z-panel-pass-form').addEventListener('submit', function (e) {
       e.preventDefault();
-      const actual    = document.getElementById('z-pass-actual').value;
-      const nueva     = document.getElementById('z-pass-nueva').value;
-      const confirmar = document.getElementById('z-pass-confirmar').value;
+      const actual = document.getElementById('z-pass-actual').value;
+      const nueva  = document.getElementById('z-pass-nueva').value;
 
       const s     = getSession();
       const users = getUsers();
       const user  = users.find(u => u.email === s.email);
 
-      if (!actual || !nueva || !confirmar) {
+      if (!actual || !nueva) {
         if (window.ZNotify) ZNotify.camposObligatorios(); return;
       }
       if (!user || user.password !== actual) {
@@ -671,9 +663,6 @@
       }
       if (nueva.length < 8) {
         if (window.ZNotify) ZNotify.passwordCorta(); return;
-      }
-      if (nueva !== confirmar) {
-        if (window.ZNotify) ZNotify.passwordNoCoincide(); return;
       }
       const idx = users.findIndex(u => u.email === s.email);
       users[idx].password = nueva;

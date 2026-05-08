@@ -102,34 +102,6 @@
               </div>
             </div>
 
-            <!-- Confirmar Contraseña -->
-            <div class="form-group">
-              <label
-                for="reg-pass-confirm"
-                class="form-label-registro"
-                data-i18n="reg-label-pass-confirm"
-                >Confirmar Contraseña</label
-              >
-              <div class="password-wrapper">
-                <input
-                  type="password"
-                  class="form-input-registro"
-                  id="reg-pass-confirm"
-                  data-placeholder-id="reg-pass-confirm-placeholder"
-                  placeholder="Repite tu contraseña"
-                  required
-                />
-                <button
-                  type="button"
-                  class="toggle-pass-btn"
-                  data-target="reg-pass-confirm"
-                  aria-label="Mostrar contraseña"
-                >
-                  <i class="bi bi-eye"></i>
-                </button>
-              </div>
-            </div>
-
             <!-- Botón Crear Cuenta -->
             <button type="submit" class="btn-registro" id="reg-btn-crear">
               Crear Cuenta
@@ -163,16 +135,9 @@
 
     <!-- Script para efectos de inputs -->
     <script>
-      // Validación en tiempo real de contraseñas
       const passInput = document.getElementById("reg-pass");
-      const passConfirm = document.getElementById("reg-pass-confirm");
-
       passInput.addEventListener("input", () => {
         passInput.classList.toggle("filled", passInput.value.length > 0);
-      });
-
-      passConfirm.addEventListener("input", () => {
-        passConfirm.classList.toggle("filled", passConfirm.value.length > 0);
       });
 
       // Toggle mostrar/ocultar contraseña
@@ -201,7 +166,6 @@
           const usuario = document.getElementById("reg-usuario").value.trim();
           const email   = document.getElementById("reg-email").value.trim();
           const pass    = document.getElementById("reg-pass").value;
-          const confirm = document.getElementById("reg-pass-confirm").value;
 
           if (!usuario || !email || !pass) {
             ZNotify.camposObligatorios();
@@ -210,11 +174,6 @@
 
           if (pass.length < 8) {
             ZNotify.passwordCorta();
-            return;
-          }
-
-          if (pass !== confirm) {
-            ZNotify.passwordNoCoincide();
             return;
           }
 
