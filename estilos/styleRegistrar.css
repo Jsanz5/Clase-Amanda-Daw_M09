@@ -175,6 +175,36 @@
   margin-bottom: 16px;
 }
 
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper .form-input-registro {
+  padding-right: 44px;
+}
+
+.toggle-pass-btn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: rgba(148, 190, 255, 0.55);
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  font-size: 16px;
+  transition: color 0.2s, transform 0.15s;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-pass-btn:hover {
+  color: var(--registro-primary);
+  transform: scale(1.15);
+}
+
 .form-input-registro {
   width: 100%;
   background: rgba(10, 24, 52, 0.75);

@@ -1,0 +1,62 @@
+/* Ajustes específicos de la página de login */
+
+/* Fila recordarme + olvidé contraseña */
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+  margin-top: -4px;
+}
+
+.login-remember {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  color: var(--registro-text-soft);
+  font-size: 13px;
+  user-select: none;
+}
+
+.login-remember input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--registro-primary);
+  cursor: pointer;
+}
+
+.login-forgot {
+  font-size: 13px;
+  color: var(--registro-primary);
+  text-decoration: none;
+  transition: color 0.2s, opacity 0.2s;
+  opacity: 0.82;
+}
+
+.login-forgot:hover {
+  color: #fff;
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* Link de registro al pie */
+.link-login {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 13.5px;
+  color: var(--registro-text-soft);
+}
+
+.link-login a {
+  color: var(--registro-primary);
+  margin-left: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.link-login a:hover {
+  color: #fff;
+  text-decoration: underline;
+}

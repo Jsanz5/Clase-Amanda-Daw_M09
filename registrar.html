@@ -82,14 +82,24 @@
                 data-i18n="reg-label-pass"
                 >Contraseña</label
               >
-              <input
-                type="password"
-                class="form-input-registro"
-                id="reg-pass"
-                data-placeholder-id="reg-pass-placeholder"
-                placeholder="Mínimo 8 caracteres"
-                required
-              />
+              <div class="password-wrapper">
+                <input
+                  type="password"
+                  class="form-input-registro"
+                  id="reg-pass"
+                  data-placeholder-id="reg-pass-placeholder"
+                  placeholder="Mínimo 8 caracteres"
+                  required
+                />
+                <button
+                  type="button"
+                  class="toggle-pass-btn"
+                  data-target="reg-pass"
+                  aria-label="Mostrar contraseña"
+                >
+                  <i class="bi bi-eye"></i>
+                </button>
+              </div>
             </div>
 
             <!-- Confirmar Contraseña -->
@@ -100,14 +110,24 @@
                 data-i18n="reg-label-pass-confirm"
                 >Confirmar Contraseña</label
               >
-              <input
-                type="password"
-                class="form-input-registro"
-                id="reg-pass-confirm"
-                data-placeholder-id="reg-pass-confirm-placeholder"
-                placeholder="Repite tu contraseña"
-                required
-              />
+              <div class="password-wrapper">
+                <input
+                  type="password"
+                  class="form-input-registro"
+                  id="reg-pass-confirm"
+                  data-placeholder-id="reg-pass-confirm-placeholder"
+                  placeholder="Repite tu contraseña"
+                  required
+                />
+                <button
+                  type="button"
+                  class="toggle-pass-btn"
+                  data-target="reg-pass-confirm"
+                  aria-label="Mostrar contraseña"
+                >
+                  <i class="bi bi-eye"></i>
+                </button>
+              </div>
             </div>
 
             <!-- Botón Crear Cuenta -->
@@ -119,7 +139,7 @@
           <!-- Link a Login -->
           <div class="link-login">
             <span data-i18n="reg-link-signin">¿Ya tienes cuenta?</span>
-            <a href="#login" data-i18n="reg-link-signin-btn"
+            <a href="./login.html" data-i18n="reg-link-signin-btn"
               >Inicia sesión aquí</a
             >
           </div>
@@ -128,6 +148,17 @@
     </section>
 
     <script src="./js/language.js"></script>
+    <script src="./js/notifications.js"></script>
+    <script>
+      // Redirigir si ya hay sesión activa
+      (function () {
+        try {
+          if (JSON.parse(localStorage.getItem('z_sesion'))) {
+            window.location.replace('./index.html');
+          }
+        } catch (e) {}
+      })();
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Script para efectos de inputs -->
@@ -137,57 +168,83 @@
       const passConfirm = document.getElementById("reg-pass-confirm");
 
       passInput.addEventListener("input", () => {
-        if (passInput.value.length > 0) {
-          passInput.classList.add("filled");
-        } else {
-          passInput.classList.remove("filled");
-        }
+        passInput.classList.toggle("filled", passInput.value.length > 0);
       });
 
       passConfirm.addEventListener("input", () => {
-        if (passConfirm.value.length > 0) {
-          passConfirm.classList.add("filled");
-        } else {
-          passConfirm.classList.remove("filled");
-        }
+        passConfirm.classList.toggle("filled", passConfirm.value.length > 0);
+      });
+
+      // Toggle mostrar/ocultar contraseña
+      document.querySelectorAll(".toggle-pass-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const input = document.getElementById(this.dataset.target);
+          const icon = this.querySelector("i");
+          if (input.type === "password") {
+            input.type = "text";
+            icon.className = "bi bi-eye-slash";
+            this.setAttribute("aria-label", "Ocultar contraseña");
+          } else {
+            input.type = "password";
+            icon.className = "bi bi-eye";
+            this.setAttribute("aria-label", "Mostrar contraseña");
+          }
+        });
       });
 
       // Validación del formulario
       document
         .getElementById("registroFormulario")
         .addEventListener("submit", (e) => {
-          const pass = document.getElementById("reg-pass").value;
-          const passConfirm = document.getElementById("reg-pass-confirm").value;
+          e.preventDefault();
 
-          if (pass !== passConfirm) {
-            e.preventDefault();
-            alert("Las contraseñas no coinciden");
+          const usuario = document.getElementById("reg-usuario").value.trim();
+          const email   = document.getElementById("reg-email").value.trim();
+          const pass    = document.getElementById("reg-pass").value;
+          const confirm = document.getElementById("reg-pass-confirm").value;
+
+          if (!usuario || !email || !pass) {
+            ZNotify.camposObligatorios();
             return;
           }
 
           if (pass.length < 8) {
-            e.preventDefault();
-            alert("La contraseña debe tener mínimo 8 caracteres");
+            ZNotify.passwordCorta();
             return;
           }
 
-          console.log("Formulario válido, datos listos para enviar");
+          if (pass !== confirm) {
+            ZNotify.passwordNoCoincide();
+            return;
+          }
+
+          // Guardar usuario en localStorage
+          const usuarios = JSON.parse(localStorage.getItem("z_usuarios") || "[]");
+          const yaExiste = usuarios.find((u) => u.email === email);
+          if (yaExiste) {
+            ZNotify.emailYaRegistrado();
+            return;
+          }
+          usuarios.push({ usuario, email, password: pass, avatar: null });
+          localStorage.setItem("z_usuarios", JSON.stringify(usuarios));
+
+          ZNotify.registroExitoso(usuario);
+
+          // Redirigir al login tras el toast
+          setTimeout(() => {
+            window.location.href = "./login.html";
+          }, 1800);
         });
 
       // Efectos en inputs
-      const inputs = document.querySelectorAll(".form-input-registro");
-      inputs.forEach((input) => {
+      document.querySelectorAll(".form-input-registro").forEach((input) => {
         input.addEventListener("focus", function () {
-          this.parentElement.style.transform = "translateY(-2px)";
+          this.closest(".form-group").style.transform = "translateY(-2px)";
         });
-
         input.addEventListener("blur", function () {
-          this.parentElement.style.transform = "translateY(0)";
+          this.closest(".form-group").style.transform = "translateY(0)";
         });
-
-        if (input.value.length > 0) {
-          input.classList.add("filled");
-        }
+        if (input.value.length > 0) input.classList.add("filled");
       });
     </script>
   </body>

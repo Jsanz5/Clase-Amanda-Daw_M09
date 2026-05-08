@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acceder - Z Animation</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="./estilos/styleIndex.css" />
+    <link rel="stylesheet" href="./estilos/styleRegistrar.css" />
+    <link rel="stylesheet" href="./estilos/styleLogin.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="imagenes/letra-z.png"
+    />
+  </head>
+  <body>
+    <!-- Sección de Login -->
+    <section class="registro-section">
+      <div class="header-registro login-header">
+        <h1 class="registro-titulo-main" id="login-titulo" data-i18n="login-titulo">¡Bienvenido!</h1>
+        <p class="registro-subtitle-main" id="login-subtitle" data-i18n="login-subtitle">
+          Nos alegra verte de nuevo
+        </p>
+      </div>
+
+      <div class="registro-form-container">
+        <div class="registro-card">
+          <form id="loginFormulario" novalidate>
+            <!-- Email -->
+            <div class="form-group">
+              <label for="login-email" class="form-label-registro" data-i18n="login-label-email">
+                Email
+              </label>
+              <input
+                type="email"
+                class="form-input-registro"
+                id="login-email"
+                placeholder="tu@email.com"
+                data-placeholder-id="login-email-placeholder"
+                required
+                autocomplete="email"
+              />
+            </div>
+
+            <!-- Contraseña -->
+            <div class="form-group">
+              <label for="login-pass" class="form-label-registro" data-i18n="login-label-pass">
+                Contraseña
+              </label>
+              <div class="password-wrapper">
+                <input
+                  type="password"
+                  class="form-input-registro"
+                  id="login-pass"
+                  placeholder="Tu contraseña"
+                  data-placeholder-id="login-pass-placeholder"
+                  required
+                  autocomplete="current-password"
+                />
+                <button
+                  type="button"
+                  class="toggle-pass-btn"
+                  data-target="login-pass"
+                  aria-label="Mostrar contraseña"
+                >
+                  <i class="bi bi-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Recordarme + Olvidé contraseña -->
+            <div class="login-options">
+              <label class="login-remember">
+                <input type="checkbox" id="login-remember" />
+                <span data-i18n="login-recordarme">Recordarme</span>
+              </label>
+              <a href="#" class="login-forgot" data-i18n="login-forgot">¿Olvidaste tu contraseña?</a>
+            </div>
+
+            <!-- Botón Iniciar Sesión -->
+            <button type="submit" class="btn-registro" id="login-btn-submit" data-i18n="login-btn-submit">
+              Iniciar sesión
+            </button>
+          </form>
+
+          <!-- Link a Registro -->
+          <div class="link-login">
+            <span data-i18n="login-no-cuenta">¿No tienes cuenta?</span>
+            <a href="./registrar.html" data-i18n="login-link-registro">Regístrate aquí</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="./js/language.js"></script>
+    <script src="./js/notifications.js"></script>
+    <script>
+      // Redirigir si ya hay sesión activa
+      (function () {
+        try {
+          if (JSON.parse(localStorage.getItem('z_sesion'))) {
+            window.location.replace('./index.html');
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // Toggle mostrar/ocultar contraseña
+      document.querySelectorAll(".toggle-pass-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const input = document.getElementById(this.dataset.target);
+          const icon = this.querySelector("i");
+          if (input.type === "password") {
+            input.type = "text";
+            icon.className = "bi bi-eye-slash";
+            this.setAttribute("aria-label", "Ocultar contraseña");
+          } else {
+            input.type = "password";
+            icon.className = "bi bi-eye";
+            this.setAttribute("aria-label", "Mostrar contraseña");
+          }
+        });
+      });
+
+      // Cargar email recordado
+      const savedEmail = localStorage.getItem("z_remember_email");
+      if (savedEmail) {
+        document.getElementById("login-email").value = savedEmail;
+        document.getElementById("login-remember").checked = true;
+      }
+
+      // Efectos en inputs
+      document.querySelectorAll(".form-input-registro").forEach((input) => {
+        input.addEventListener("focus", function () {
+          this.closest(".form-group").style.transform = "translateY(-2px)";
+        });
+        input.addEventListener("blur", function () {
+          this.closest(".form-group").style.transform = "translateY(0)";
+        });
+        if (input.value.length > 0) input.classList.add("filled");
+      });
+
+      // Envío del formulario
+      document.getElementById("loginFormulario").addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById("login-email").value.trim();
+        const pass = document.getElementById("login-pass").value;
+        const remember = document.getElementById("login-remember").checked;
+
+        if (!email || !pass) {
+          ZNotify.camposObligatorios();
+          return;
+        }
+
+        // Recuperar usuarios registrados
+        const usuarios = JSON.parse(localStorage.getItem("z_usuarios") || "[]");
+        const usuario = usuarios.find(
+          (u) => u.email === email && u.password === pass
+        );
+
+        if (!usuario) {
+          ZNotify.credencialesIncorrectas();
+          return;
+        }
+
+        // Guardar sesión
+        localStorage.setItem("z_sesion", JSON.stringify({
+          usuario: usuario.usuario,
+          email: usuario.email,
+          avatar: usuario.avatar || null
+        }));
+
+        if (remember) {
+          localStorage.setItem("z_remember_email", email);
+        } else {
+          localStorage.removeItem("z_remember_email");
+        }
+
+        ZNotify.loginExitoso(usuario.usuario);
+
+        // Redirigir al inicio tras el toast
+        setTimeout(() => {
+          window.location.href = "./index.html";
+        }, 1600);
+      });
+    </script>
+  </body>
+</html>

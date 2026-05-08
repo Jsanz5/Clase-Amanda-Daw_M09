@@ -387,6 +387,142 @@ const translations = {
     en: "Sign in here",
   },
 
+  // BUSCADOR
+  "search-placeholder": {
+    ca: "Cerca anime...",
+    es: "Buscar anime...",
+    en: "Search anime...",
+  },
+
+  // LOGIN
+  "login-titulo": {
+    ca: "Benvingut!",
+    es: "¡Bienvenido!",
+    en: "Welcome back!",
+  },
+  "login-subtitle": {
+    ca: "Ens alegra veure't de nou",
+    es: "Nos alegra verte de nuevo",
+    en: "Glad to see you again",
+  },
+  "login-label-email": {
+    ca: "Correu electrònic",
+    es: "Email",
+    en: "Email",
+  },
+  "login-label-pass": {
+    ca: "Contrasenya",
+    es: "Contraseña",
+    en: "Password",
+  },
+  "login-recordarme": {
+    ca: "Recorda'm",
+    es: "Recordarme",
+    en: "Remember me",
+  },
+  "login-forgot": {
+    ca: "Has oblidat la contrasenya?",
+    es: "¿Olvidaste tu contraseña?",
+    en: "Forgot your password?",
+  },
+  "login-btn-submit": {
+    ca: "Iniciar sessió",
+    es: "Iniciar sesión",
+    en: "Log in",
+  },
+  "login-no-cuenta": {
+    ca: "No tens compte?",
+    es: "¿No tienes cuenta?",
+    en: "Don't have an account?",
+  },
+  "login-link-registro": {
+    ca: "Registra't aquí",
+    es: "Regístrate aquí",
+    en: "Register here",
+  },
+  "login-email-placeholder": {
+    ca: "tu@correu.com",
+    es: "tu@email.com",
+    en: "you@email.com",
+  },
+  "login-pass-placeholder": {
+    ca: "La teva contrasenya",
+    es: "Tu contraseña",
+    en: "Your password",
+  },
+
+  // SESIÓN / PANEL DE USUARIO
+  "session-mi-panel": {
+    ca: "El meu panell",
+    es: "Mi panel",
+    en: "My panel",
+  },
+  "session-cerrar-sesion": {
+    ca: "Tancar sessió",
+    es: "Cerrar sesión",
+    en: "Log out",
+  },
+  "session-mi-perfil": {
+    ca: "El meu perfil",
+    es: "Mi perfil",
+    en: "My profile",
+  },
+  "session-foto-perfil": {
+    ca: "Foto de perfil",
+    es: "Foto de perfil",
+    en: "Profile photo",
+  },
+  "session-cambiar-foto": {
+    ca: "Canviar foto",
+    es: "Cambiar foto",
+    en: "Change photo",
+  },
+  "session-foto-hint": {
+    ca: "JPG, PNG o GIF · Màx 2 MB",
+    es: "JPG, PNG o GIF · Máx 2 MB",
+    en: "JPG, PNG or GIF · Max 2 MB",
+  },
+  "session-cambiar-pass": {
+    ca: "Canviar contrasenya",
+    es: "Cambiar contraseña",
+    en: "Change password",
+  },
+  "session-label-pass-actual": {
+    ca: "Contrasenya actual",
+    es: "Contraseña actual",
+    en: "Current password",
+  },
+  "session-label-pass-nueva": {
+    ca: "Nova contrasenya",
+    es: "Nueva contraseña",
+    en: "New password",
+  },
+  "session-label-pass-confirmar": {
+    ca: "Confirmar nova contrasenya",
+    es: "Confirmar nueva contraseña",
+    en: "Confirm new password",
+  },
+  "session-actualizar-pass": {
+    ca: "Actualitzar contrasenya",
+    es: "Actualizar contraseña",
+    en: "Update password",
+  },
+  "session-placeholder-pass-actual": {
+    ca: "La teva contrasenya actual",
+    es: "Tu contraseña actual",
+    en: "Your current password",
+  },
+  "session-placeholder-pass-nueva": {
+    ca: "Mínim 8 caràcters",
+    es: "Mínimo 8 caracteres",
+    en: "Minimum 8 characters",
+  },
+  "session-placeholder-pass-confirmar": {
+    ca: "Repeteix la nova contrasenya",
+    es: "Repite la nueva contraseña",
+    en: "Repeat the new password",
+  },
+
   // GRÁFICO DE ESTADÍSTICAS
   "chart-label": {
     ca: "Milions de Visualitzacions",
@@ -537,4 +673,4 @@ window.getCurrentLang = function () {
 };
 
 // Ejecuto al cargar la página
-window.onload = loadPreference;
+window.addEventListener('load', loadPreference);
