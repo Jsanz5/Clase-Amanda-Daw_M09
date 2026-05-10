@@ -100,10 +100,12 @@
         transition: transform 0.2s;
       }
 
-      /* Mostrar al hacer hover en la tarjeta */
-      .card-img-wrapper:hover .card-bookmark-btn {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
+      /* Mostrar solo al pasar el ratón (no en táctil) */
+      @media (pointer: fine) {
+        .card-img-wrapper:hover .card-bookmark-btn {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
       }
 
       /* Estado: guardado (solo visible en hover, color ámbar) */
@@ -125,13 +127,6 @@
       .card-bookmark-btn:hover i { transform: scale(1.15); }
       .card-bookmark-btn:active  { transform: translateX(-50%) scale(0.95) !important; }
 
-      /* Touch devices: pill siempre visible */
-      @media (hover: none) {
-        .card-bookmark-btn {
-          opacity: 1;
-          transform: translateX(-50%) translateY(0);
-        }
-      }
 
       /* ── Panel watchlist (drawer derecho) ── */
       #watchlist-panel {
