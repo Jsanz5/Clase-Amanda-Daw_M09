@@ -25,13 +25,38 @@
       sizes="32x32"
       href="imagenes/letra-z.png"
     />
+
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "wovxlyzofq");
+    </script>
   </head>
   <body>
     <!-- Sección de Login -->
     <section class="registro-section">
       <div class="header-registro login-header">
-        <h1 class="registro-titulo-main" id="login-titulo" data-i18n="login-titulo">¡Bienvenido!</h1>
-        <p class="registro-subtitle-main" id="login-subtitle" data-i18n="login-subtitle">
+        <h1
+          class="registro-titulo-main"
+          id="login-titulo"
+          data-i18n="login-titulo"
+        >
+          ¡Bienvenido!
+        </h1>
+        <p
+          class="registro-subtitle-main"
+          id="login-subtitle"
+          data-i18n="login-subtitle"
+        >
           Nos alegra verte de nuevo
         </p>
       </div>
@@ -41,7 +66,11 @@
           <form id="loginFormulario" novalidate>
             <!-- Email -->
             <div class="form-group">
-              <label for="login-email" class="form-label-registro" data-i18n="login-label-email">
+              <label
+                for="login-email"
+                class="form-label-registro"
+                data-i18n="login-label-email"
+              >
                 Email
               </label>
               <input
@@ -57,7 +86,11 @@
 
             <!-- Contraseña -->
             <div class="form-group">
-              <label for="login-pass" class="form-label-registro" data-i18n="login-label-pass">
+              <label
+                for="login-pass"
+                class="form-label-registro"
+                data-i18n="login-label-pass"
+              >
                 Contraseña
               </label>
               <div class="password-wrapper">
@@ -87,11 +120,18 @@
                 <input type="checkbox" id="login-remember" />
                 <span data-i18n="login-recordarme">Recordarme</span>
               </label>
-              <a href="#" class="login-forgot" data-i18n="login-forgot">¿Olvidaste tu contraseña?</a>
+              <a href="#" class="login-forgot" data-i18n="login-forgot"
+                >¿Olvidaste tu contraseña?</a
+              >
             </div>
 
             <!-- Botón Iniciar Sesión -->
-            <button type="submit" class="btn-registro" id="login-btn-submit" data-i18n="login-btn-submit">
+            <button
+              type="submit"
+              class="btn-registro"
+              id="login-btn-submit"
+              data-i18n="login-btn-submit"
+            >
               Iniciar sesión
             </button>
           </form>
@@ -99,7 +139,9 @@
           <!-- Link a Registro -->
           <div class="link-login">
             <span data-i18n="login-no-cuenta">¿No tienes cuenta?</span>
-            <a href="./registrar.html" data-i18n="login-link-registro">Regístrate aquí</a>
+            <a href="./registrar.html" data-i18n="login-link-registro"
+              >Regístrate aquí</a
+            >
           </div>
         </div>
       </div>
@@ -111,8 +153,8 @@
       // Redirigir si ya hay sesión activa
       (function () {
         try {
-          if (JSON.parse(localStorage.getItem('z_sesion'))) {
-            window.location.replace('./index.html');
+          if (JSON.parse(localStorage.getItem("z_sesion"))) {
+            window.location.replace("./index.html");
           }
         } catch (e) {}
       })();
@@ -156,49 +198,56 @@
       });
 
       // Envío del formulario
-      document.getElementById("loginFormulario").addEventListener("submit", (e) => {
-        e.preventDefault();
+      document
+        .getElementById("loginFormulario")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
 
-        const email = document.getElementById("login-email").value.trim();
-        const pass = document.getElementById("login-pass").value;
-        const remember = document.getElementById("login-remember").checked;
+          const email = document.getElementById("login-email").value.trim();
+          const pass = document.getElementById("login-pass").value;
+          const remember = document.getElementById("login-remember").checked;
 
-        if (!email || !pass) {
-          ZNotify.camposObligatorios();
-          return;
-        }
+          if (!email || !pass) {
+            ZNotify.camposObligatorios();
+            return;
+          }
 
-        // Recuperar usuarios registrados
-        const usuarios = JSON.parse(localStorage.getItem("z_usuarios") || "[]");
-        const usuario = usuarios.find(
-          (u) => u.email === email && u.password === pass
-        );
+          // Recuperar usuarios registrados
+          const usuarios = JSON.parse(
+            localStorage.getItem("z_usuarios") || "[]",
+          );
+          const usuario = usuarios.find(
+            (u) => u.email === email && u.password === pass,
+          );
 
-        if (!usuario) {
-          ZNotify.credencialesIncorrectas();
-          return;
-        }
+          if (!usuario) {
+            ZNotify.credencialesIncorrectas();
+            return;
+          }
 
-        // Guardar sesión
-        localStorage.setItem("z_sesion", JSON.stringify({
-          usuario: usuario.usuario,
-          email: usuario.email,
-          avatar: usuario.avatar || null
-        }));
+          // Guardar sesión
+          localStorage.setItem(
+            "z_sesion",
+            JSON.stringify({
+              usuario: usuario.usuario,
+              email: usuario.email,
+              avatar: usuario.avatar || null,
+            }),
+          );
 
-        if (remember) {
-          localStorage.setItem("z_remember_email", email);
-        } else {
-          localStorage.removeItem("z_remember_email");
-        }
+          if (remember) {
+            localStorage.setItem("z_remember_email", email);
+          } else {
+            localStorage.removeItem("z_remember_email");
+          }
 
-        ZNotify.loginExitoso(usuario.usuario);
+          ZNotify.loginExitoso(usuario.usuario);
 
-        // Redirigir al inicio tras el toast
-        setTimeout(() => {
-          window.location.href = "./index.html";
-        }, 1600);
-      });
+          // Redirigir al inicio tras el toast
+          setTimeout(() => {
+            window.location.href = "./index.html";
+          }, 1600);
+        });
     </script>
   </body>
 </html>
