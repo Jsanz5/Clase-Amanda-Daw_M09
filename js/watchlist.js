@@ -100,9 +100,17 @@
         transition: transform 0.2s;
       }
 
-      /* Mostrar solo al pasar el ratón (no en táctil) */
+      /* Ratón: mostrar al hacer hover */
       @media (pointer: fine) {
         .card-img-wrapper:hover .card-bookmark-btn {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+
+      /* Táctil: mostrar al tocar la imagen (clase añadida por JS) */
+      @media (pointer: coarse) {
+        .card-bookmark-btn.touch-visible {
           opacity: 1;
           transform: translateX(-50%) translateY(0);
         }
@@ -428,6 +436,23 @@
         const title = card.querySelector('.card-title')?.textContent?.trim() || '';
         toggleItem({ id, title, img: imgSrc, alt: imgAlt }, btn);
       });
+
+      // Tap en la imagen (táctil): muestra/oculta la pill
+      wrapper.addEventListener('click', function (e) {
+        if (!window.matchMedia('(pointer: coarse)').matches) return;
+        if (e.target.closest('.card-bookmark-btn')) return;
+        const isVisible = btn.classList.contains('touch-visible');
+        document.querySelectorAll('.card-bookmark-btn.touch-visible').forEach(b => b.classList.remove('touch-visible'));
+        if (!isVisible) btn.classList.add('touch-visible');
+      });
+    });
+
+    // Tap fuera de cualquier tarjeta: oculta todas las pills táctiles
+    document.addEventListener('click', function (e) {
+      if (!window.matchMedia('(pointer: coarse)').matches) return;
+      if (!e.target.closest('.card-img-wrapper')) {
+        document.querySelectorAll('.card-bookmark-btn.touch-visible').forEach(b => b.classList.remove('touch-visible'));
+      }
     });
 
     // — Eventos globales —
