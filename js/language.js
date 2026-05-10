@@ -339,9 +339,9 @@ const translations = {
     en: "example@email.com",
   },
   "reg-pass-placeholder": {
-    ca: "Contrasenya",
-    es: "Contraseña",
-    en: "Password",
+    ca: "Mínim 8 caràcters",
+    es: "Mínimo 8 caracteres",
+    en: "Minimum 8 characters",
   },
   "reg-pass-confirm-placeholder": {
     ca: "Repeteix la contrasenya",
@@ -446,9 +446,9 @@ const translations = {
     en: "you@email.com",
   },
   "login-pass-placeholder": {
-    ca: "La teva contrasenya",
-    es: "Tu contraseña",
-    en: "Your password",
+    ca: "Mínim 8 caràcters",
+    es: "Mínimo 8 caracteres",
+    en: "Minimum 8 characters",
   },
 
   // SESIÓN / PANEL DE USUARIO

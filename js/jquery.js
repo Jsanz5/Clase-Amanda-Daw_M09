@@ -120,6 +120,6 @@ $(function () {
     placeholder: "ui-state-highlight",
   });
 
-  // Datepicker: Calendario al hacer clic en el input nombre
-  $("#nombre").datepicker();
+  // Datepicker: widget de jQuery UI (sin campo activo en el formulario)
+  // $("#nombre").datepicker(); // eliminado: causaba calendario en campo de texto
 });
