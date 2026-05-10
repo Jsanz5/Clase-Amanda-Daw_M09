@@ -1,7 +1,6 @@
 // Z Animation — Buscador de anime en tiempo real
 (function () {
 
-  // ── Estilos ──────────────────────────────────────────────────────────────
   (function injectStyles() {
     const style = document.createElement('style');
     style.textContent = `
@@ -91,12 +90,139 @@
         border-color: rgba(98, 167, 251, 0.52);
       }
 
-      /* Transición de tarjetas */
-      #Episodios .row.g-4 > [class*="col-"] {
-        transition: opacity 0.2s ease;
+      /* ── Dropdown de resultados ── */
+      .search-dropdown {
+        display: none;
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        width: 320px;
+        max-height: 420px;
+        overflow-y: auto;
+        background: rgba(8, 14, 36, 0.97);
+        border: 1px solid rgba(98, 167, 251, 0.22);
+        border-radius: 16px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 4px 16px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        z-index: 9999;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(98, 167, 251, 0.25) transparent;
+        animation: search-drop-in 0.2s cubic-bezier(0.34, 1.3, 0.64, 1);
+      }
+      .search-dropdown::-webkit-scrollbar { width: 4px; }
+      .search-dropdown::-webkit-scrollbar-track { background: transparent; }
+      .search-dropdown::-webkit-scrollbar-thumb { background: rgba(98, 167, 251, 0.22); border-radius: 2px; }
+
+      @keyframes search-drop-in {
+        from { opacity: 0; transform: translateY(-8px) scale(0.97); }
+        to   { opacity: 1; transform: translateY(0) scale(1); }
       }
 
-      /* Mensaje sin resultados */
+      /* Header del dropdown */
+      .search-dropdown-header {
+        padding: 10px 14px 6px;
+        font-size: 10.5px;
+        font-family: 'Inter', system-ui, sans-serif;
+        font-weight: 600;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: rgba(98, 167, 251, 0.55);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      /* Item de resultado */
+      .search-result-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 14px;
+        cursor: pointer;
+        transition: background 0.15s;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      }
+      .search-result-item:last-child { border-bottom: none; }
+      .search-result-item:hover {
+        background: rgba(98, 167, 251, 0.1);
+      }
+
+      .search-result-img {
+        width: 48px;
+        height: 62px;
+        object-fit: cover;
+        border-radius: 8px;
+        flex-shrink: 0;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .search-result-info {
+        flex: 1;
+        min-width: 0;
+      }
+      .search-result-title {
+        display: block;
+        font-size: 13px;
+        font-family: 'Inter', system-ui, sans-serif;
+        font-weight: 600;
+        color: #f6f9ff;
+        line-height: 1.3;
+        margin-bottom: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .search-result-title mark {
+        background: none;
+        color: #62a7fb;
+        font-weight: 700;
+      }
+      .search-result-desc {
+        display: block;
+        font-size: 11.5px;
+        font-family: 'Inter', system-ui, sans-serif;
+        color: rgba(246, 249, 255, 0.42);
+        line-height: 1.4;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .search-result-arrow {
+        color: rgba(98, 167, 251, 0.35);
+        font-size: 13px;
+        flex-shrink: 0;
+        transition: color 0.15s, transform 0.15s;
+      }
+      .search-result-item:hover .search-result-arrow {
+        color: #62a7fb;
+        transform: translateX(3px);
+      }
+
+      /* Sin resultados */
+      .search-empty {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 24px 16px;
+        color: rgba(246, 249, 255, 0.35);
+        font-family: 'Inter', system-ui, sans-serif;
+        font-size: 13px;
+      }
+      .search-empty i {
+        font-size: 22px;
+        color: rgba(98, 167, 251, 0.3);
+        flex-shrink: 0;
+      }
+
+      /* Highlight al hacer scroll a la card */
+      .anime-card.search-highlight {
+        outline: 2px solid #62a7fb;
+        outline-offset: 3px;
+        transition: outline 0.2s;
+        border-radius: 12px;
+      }
+
+      /* Mensaje sin resultados en grid */
       #search-no-results {
         display: none;
         align-items: center;
@@ -134,56 +260,72 @@
           border-radius: 12px;
         }
         .search-clear-btn { right: 10px; }
+        .search-dropdown {
+          width: 100%;
+          right: 0;
+          left: 0;
+        }
       }
     `;
     document.head.appendChild(style);
   })();
 
-  // ── Traducciones del placeholder ─────────────────────────────────────────
   const PLACEHOLDERS = {
     es: 'Buscar anime...',
     ca: 'Cerca anime...',
     en: 'Search anime...',
   };
-
-  const NO_RESULTS = {
-    es: (q) => `No se encontraron resultados para <strong>"${q}"</strong>`,
-    ca: (q) => `No s'han trobat resultats per a <strong>"${q}"</strong>`,
-    en: (q) => `No results found for <strong>"${q}"</strong>`,
+  const LABELS = {
+    es: { header: 'Resultados', empty: (q) => `Sin resultados para "<strong>${q}</strong>"` },
+    ca: { header: 'Resultats',  empty: (q) => `Sense resultats per a "<strong>${q}</strong>"` },
+    en: { header: 'Results',    empty: (q) => `No results for "<strong>${q}</strong>"` },
   };
 
   function getLang() { return localStorage.getItem('userLang') || 'es'; }
 
-  // ── Lógica principal ─────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', function () {
     const wrap      = document.getElementById('search-wrap');
     const input     = document.getElementById('search-input');
     const toggleBtn = document.getElementById('btn-search-toggle');
     const clearBtn  = document.getElementById('search-clear-btn');
-    const expand    = document.getElementById('search-expand');
 
     if (!wrap || !input) return;
 
+    // Dropdown
+    const dropdown = document.createElement('div');
+    dropdown.className = 'search-dropdown';
+    dropdown.id = 'search-dropdown';
+    document.getElementById('nav-search-item').appendChild(dropdown);
+
+    // Índice de cards
+    const index = [];
+    document.querySelectorAll('.anime-card').forEach(card => {
+      const title  = card.querySelector('.card-title')?.textContent?.trim() || '';
+      const desc   = card.querySelector('.card-text')?.textContent?.trim()  || '';
+      const img    = card.querySelector('.card-img-wrapper img');
+      index.push({ card, title, desc, imgSrc: img?.getAttribute('src') || '', imgAlt: img?.getAttribute('alt') || '' });
+    });
+
     // Placeholder según idioma
     function updatePlaceholder(lang) {
-      const l = lang || getLang();
-      input.placeholder = PLACEHOLDERS[l] || PLACEHOLDERS.es;
+      input.placeholder = PLACEHOLDERS[lang || getLang()] || PLACEHOLDERS.es;
     }
     updatePlaceholder();
 
-    // Envolver setLanguage para reaccionar al cambio de idioma en caliente.
-    // IMPORTANTE: se recibe lang como parámetro porque savePreference
-    // se llama DESPUÉS de setLanguage, así que localStorage aún tiene el idioma anterior.
+    // Wrapper setLanguage
     const origSetLanguage = window.setLanguage;
     if (typeof origSetLanguage === 'function') {
       window.setLanguage = function (lang) {
         origSetLanguage(lang);
         updatePlaceholder(lang);
-        if (input.value.trim()) filterCards(input.value.trim(), lang);
+        if (input.value.trim()) {
+          renderDropdown(input.value.trim(), lang);
+          filterCards(input.value.trim(), lang);
+        }
       };
     }
 
-    // ── Toggle abrir/cerrar (solo desktop) ──
+    //  Toggle abrir/cerrar 
     function openSearch() {
       wrap.classList.add('open');
       toggleBtn?.setAttribute('aria-expanded', 'true');
@@ -194,6 +336,7 @@
       toggleBtn?.setAttribute('aria-expanded', 'false');
       input.value = '';
       if (clearBtn) clearBtn.style.display = 'none';
+      hideDropdown();
       filterCards('');
     }
 
@@ -202,35 +345,89 @@
       wrap.classList.contains('open') ? closeSearch() : openSearch();
     });
 
-    // Cerrar al hacer clic fuera
     document.addEventListener('click', (e) => {
-      if (!wrap.contains(e.target)) closeSearch();
+      if (!wrap.contains(e.target) && !dropdown.contains(e.target)) closeSearch();
     });
-
-    // Cerrar con Escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeSearch();
     });
 
-    // Botón limpiar
     clearBtn?.addEventListener('click', (e) => {
       e.stopPropagation();
       input.value = '';
       clearBtn.style.display = 'none';
+      hideDropdown();
       filterCards('');
       input.focus();
     });
 
-    // Filtrado en tiempo real
+    //  Input en tiempo real 
     input.addEventListener('input', function () {
       const q = this.value.trim();
       if (clearBtn) clearBtn.style.display = q ? 'flex' : 'none';
+      if (!q) { hideDropdown(); filterCards(''); return; }
+      renderDropdown(q);
       filterCards(q);
     });
 
-    // ── Filtrar tarjetas ─────────────────────────────────────────────────
-    // lang es opcional: si viene de la envoltura de setLanguage se pasa directo
-    // para evitar leer localStorage antes de que savePreference lo actualice.
+    //  Dropdown 
+    function renderDropdown(q, lang) {
+      const lbl     = LABELS[lang || getLang()] || LABELS.es;
+      const query   = q.toLowerCase();
+      const results = index.filter(item =>
+        item.title.toLowerCase().includes(query) || item.desc.toLowerCase().includes(query)
+      );
+
+      if (!results.length) {
+        dropdown.innerHTML = `
+          <div class="search-empty">
+            <i class="bi bi-search"></i>
+            <span>${lbl.empty(q)}</span>
+          </div>`;
+        dropdown.style.display = 'block';
+        return;
+      }
+
+      dropdown.innerHTML = `<div class="search-dropdown-header">${lbl.header}</div>` +
+        results.map((item, i) => `
+          <div class="search-result-item" data-idx="${i}">
+            <img src="${item.imgSrc}" alt="${item.imgAlt}" class="search-result-img">
+            <div class="search-result-info">
+              <span class="search-result-title">${highlight(item.title, q)}</span>
+              <span class="search-result-desc">${item.desc.slice(0, 72)}</span>
+            </div>
+            <i class="bi bi-chevron-right search-result-arrow"></i>
+          </div>`
+        ).join('');
+
+      dropdown.querySelectorAll('.search-result-item').forEach(el => {
+        el.addEventListener('click', () => {
+          const item = results[+el.dataset.idx];
+          scrollToCard(item.card);
+          closeSearch();
+        });
+      });
+
+      dropdown.style.display = 'block';
+    }
+
+    function hideDropdown() {
+      dropdown.style.display = 'none';
+      dropdown.innerHTML = '';
+    }
+
+    function highlight(text, q) {
+      return text.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi'),
+        '<mark>$1</mark>');
+    }
+
+    function scrollToCard(card) {
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      card.classList.add('search-highlight');
+      setTimeout(() => card.classList.remove('search-highlight'), 2000);
+    }
+
+    //  Filtrar cards en grid 
     function filterCards(query, lang) {
       const cols = document.querySelectorAll('#Episodios .row.g-4 > [class*="col-"]');
       let visible = 0;
@@ -238,14 +435,13 @@
       cols.forEach(col => {
         const card = col.querySelector('.anime-card');
         if (!card) return;
-
         const title   = (card.querySelector('.card-title')?.textContent || '').toLowerCase();
         const desc    = (card.querySelector('.card-text')?.textContent  || '').toLowerCase();
         const matches = !query || title.includes(query.toLowerCase()) || desc.includes(query.toLowerCase());
 
         if (matches) {
           col.style.display = '';
-          void col.offsetWidth; // fuerza reflow para que la transición opacity se active
+          void col.offsetWidth;
           col.style.opacity = '1';
           visible++;
         } else {
@@ -254,14 +450,11 @@
             const currentQ = input.value.trim().toLowerCase();
             const t = (card.querySelector('.card-title')?.textContent || '').toLowerCase();
             const d = (card.querySelector('.card-text')?.textContent  || '').toLowerCase();
-            if (currentQ && !t.includes(currentQ) && !d.includes(currentQ)) {
-              col.style.display = 'none';
-            }
+            if (currentQ && !t.includes(currentQ) && !d.includes(currentQ)) col.style.display = 'none';
           }, 220);
         }
       });
 
-      // Mensaje sin resultados
       let noRes = document.getElementById('search-no-results');
       if (!noRes) {
         const row = document.querySelector('#Episodios .row.g-4');
@@ -272,13 +465,7 @@
         }
       }
       if (noRes) {
-        const show = query && visible === 0;
-        noRes.style.display = show ? 'flex' : 'none';
-        if (show) {
-          const activeLang = lang || getLang(); // usar lang recibido si existe
-          const fn = NO_RESULTS[activeLang] || NO_RESULTS.es;
-          noRes.innerHTML = `<i class="bi bi-search"></i><span>${fn(query)}</span>`;
-        }
+        noRes.style.display = (query && visible === 0) ? 'flex' : 'none';
       }
     }
   });
