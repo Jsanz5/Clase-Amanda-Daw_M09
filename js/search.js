@@ -1,10 +1,8 @@
-// Z Animation — Buscador de anime en tiempo real
 (function () {
 
   (function injectStyles() {
     const style = document.createElement('style');
     style.textContent = `
-      /* ── Wrapper de búsqueda ── */
       #nav-search-item { position: relative; }
 
       .search-wrap {
@@ -13,7 +11,6 @@
         gap: 0;
       }
 
-      /* Área que se expande (input + botón limpiar) */
       .search-expand {
         display: flex;
         align-items: center;
@@ -28,7 +25,6 @@
         opacity: 1;
       }
 
-      /* Input */
       .search-input {
         background: rgba(10, 24, 52, 0.88);
         border: 1px solid rgba(98, 167, 251, 0.32);
@@ -49,7 +45,6 @@
       .search-input::placeholder { color: rgba(246, 249, 255, 0.38); }
       .search-input::-webkit-search-cancel-button { display: none; }
 
-      /* Botón limpiar (X) */
       .search-clear-btn {
         position: absolute;
         right: 8px;
@@ -67,7 +62,6 @@
       }
       .search-clear-btn:hover { color: rgba(246, 249, 255, 0.85); }
 
-      /* Botón lupa (toggle) */
       .btn-search-toggle {
         width: 36px;
         height: 36px;
@@ -90,36 +84,31 @@
         border-color: rgba(98, 167, 251, 0.52);
       }
 
-      /* ── Dropdown de resultados ── */
-      .search-dropdown {
+      #search-dropdown {
         display: none;
-        position: absolute;
-        top: calc(100% + 10px);
-        right: 0;
-        width: 320px;
+        position: fixed;
         max-height: 420px;
         overflow-y: auto;
         background: rgba(8, 14, 36, 0.97);
         border: 1px solid rgba(98, 167, 251, 0.22);
         border-radius: 16px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 4px 16px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 4px 16px rgba(0,0,0,0.3);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
-        z-index: 9999;
+        z-index: 99999;
         scrollbar-width: thin;
         scrollbar-color: rgba(98, 167, 251, 0.25) transparent;
-        animation: search-drop-in 0.2s cubic-bezier(0.34, 1.3, 0.64, 1);
+        animation: search-drop-in 0.18s cubic-bezier(0.34, 1.2, 0.64, 1);
       }
-      .search-dropdown::-webkit-scrollbar { width: 4px; }
-      .search-dropdown::-webkit-scrollbar-track { background: transparent; }
-      .search-dropdown::-webkit-scrollbar-thumb { background: rgba(98, 167, 251, 0.22); border-radius: 2px; }
+      #search-dropdown::-webkit-scrollbar { width: 4px; }
+      #search-dropdown::-webkit-scrollbar-track { background: transparent; }
+      #search-dropdown::-webkit-scrollbar-thumb { background: rgba(98,167,251,0.22); border-radius: 2px; }
 
       @keyframes search-drop-in {
-        from { opacity: 0; transform: translateY(-8px) scale(0.97); }
+        from { opacity: 0; transform: translateY(-6px) scale(0.97); }
         to   { opacity: 1; transform: translateY(0) scale(1); }
       }
 
-      /* Header del dropdown */
       .search-dropdown-header {
         padding: 10px 14px 6px;
         font-size: 10.5px;
@@ -128,10 +117,9 @@
         letter-spacing: 0.8px;
         text-transform: uppercase;
         color: rgba(98, 167, 251, 0.55);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
       }
 
-      /* Item de resultado */
       .search-result-item {
         display: flex;
         align-items: center;
@@ -139,12 +127,10 @@
         padding: 10px 14px;
         cursor: pointer;
         transition: background 0.15s;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        border-bottom: 1px solid rgba(255,255,255,0.04);
       }
       .search-result-item:last-child { border-bottom: none; }
-      .search-result-item:hover {
-        background: rgba(98, 167, 251, 0.1);
-      }
+      .search-result-item:hover { background: rgba(98, 167, 251, 0.1); }
 
       .search-result-img {
         width: 48px;
@@ -152,13 +138,11 @@
         object-fit: cover;
         border-radius: 8px;
         flex-shrink: 0;
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255,255,255,0.08);
       }
 
-      .search-result-info {
-        flex: 1;
-        min-width: 0;
-      }
+      .search-result-info { flex: 1; min-width: 0; }
+
       .search-result-title {
         display: block;
         font-size: 13px;
@@ -176,11 +160,12 @@
         color: #62a7fb;
         font-weight: 700;
       }
+
       .search-result-desc {
         display: block;
         font-size: 11.5px;
         font-family: 'Inter', system-ui, sans-serif;
-        color: rgba(246, 249, 255, 0.42);
+        color: rgba(246,249,255,0.42);
         line-height: 1.4;
         white-space: nowrap;
         overflow: hidden;
@@ -188,7 +173,7 @@
       }
 
       .search-result-arrow {
-        color: rgba(98, 167, 251, 0.35);
+        color: rgba(98,167,251,0.35);
         font-size: 13px;
         flex-shrink: 0;
         transition: color 0.15s, transform 0.15s;
@@ -198,38 +183,34 @@
         transform: translateX(3px);
       }
 
-      /* Sin resultados */
       .search-empty {
         display: flex;
         align-items: center;
         gap: 12px;
         padding: 24px 16px;
-        color: rgba(246, 249, 255, 0.35);
+        color: rgba(246,249,255,0.35);
         font-family: 'Inter', system-ui, sans-serif;
         font-size: 13px;
       }
       .search-empty i {
         font-size: 22px;
-        color: rgba(98, 167, 251, 0.3);
+        color: rgba(98,167,251,0.3);
         flex-shrink: 0;
       }
 
-      /* Highlight al hacer scroll a la card */
       .anime-card.search-highlight {
         outline: 2px solid #62a7fb;
         outline-offset: 3px;
-        transition: outline 0.2s;
         border-radius: 12px;
       }
 
-      /* Mensaje sin resultados en grid */
       #search-no-results {
         display: none;
         align-items: center;
         justify-content: center;
         gap: 14px;
         padding: 48px 20px;
-        color: rgba(246, 249, 255, 0.42);
+        color: rgba(246,249,255,0.42);
         font-family: 'Inter', system-ui, sans-serif;
         font-size: 15px;
         width: 100%;
@@ -237,16 +218,12 @@
       }
       #search-no-results i {
         font-size: 28px;
-        color: rgba(98, 167, 251, 0.35);
+        color: rgba(98,167,251,0.35);
         flex-shrink: 0;
       }
 
-      /* ── Responsive: móvil (dentro del navbar colapsado) ── */
       @media (max-width: 991px) {
-        #nav-search-item {
-          width: 100%;
-          margin: 2px 0;
-        }
+        #nav-search-item { width: 100%; margin: 2px 0; }
         .search-wrap { width: 100%; }
         .btn-search-toggle { display: none; }
         .search-expand {
@@ -255,16 +232,8 @@
           flex: 1;
           overflow: visible;
         }
-        .search-input {
-          width: 100%;
-          border-radius: 12px;
-        }
+        .search-input { width: 100%; border-radius: 12px; }
         .search-clear-btn { right: 10px; }
-        .search-dropdown {
-          width: 100%;
-          right: 0;
-          left: 0;
-        }
       }
     `;
     document.head.appendChild(style);
@@ -291,13 +260,10 @@
 
     if (!wrap || !input) return;
 
-    // Dropdown
     const dropdown = document.createElement('div');
-    dropdown.className = 'search-dropdown';
     dropdown.id = 'search-dropdown';
-    document.getElementById('nav-search-item').appendChild(dropdown);
+    document.body.appendChild(dropdown);
 
-    // Índice de cards
     const index = [];
     document.querySelectorAll('.anime-card').forEach(card => {
       const title  = card.querySelector('.card-title')?.textContent?.trim() || '';
@@ -306,13 +272,31 @@
       index.push({ card, title, desc, imgSrc: img?.getAttribute('src') || '', imgAlt: img?.getAttribute('alt') || '' });
     });
 
-    // Placeholder según idioma
+    function positionDropdown() {
+      const rect   = input.getBoundingClientRect();
+      const mobile = window.innerWidth <= 991;
+      const gap    = 8;
+
+      dropdown.style.top = (rect.bottom + gap) + 'px';
+
+      if (mobile) {
+        dropdown.style.left  = '8px';
+        dropdown.style.right = '8px';
+        dropdown.style.width = 'auto';
+      } else {
+        const searchItem = document.getElementById('nav-search-item');
+        const sRect      = searchItem.getBoundingClientRect();
+        dropdown.style.right = (window.innerWidth - sRect.right) + 'px';
+        dropdown.style.left  = 'auto';
+        dropdown.style.width = '320px';
+      }
+    }
+
     function updatePlaceholder(lang) {
       input.placeholder = PLACEHOLDERS[lang || getLang()] || PLACEHOLDERS.es;
     }
     updatePlaceholder();
 
-    // Wrapper setLanguage
     const origSetLanguage = window.setLanguage;
     if (typeof origSetLanguage === 'function') {
       window.setLanguage = function (lang) {
@@ -325,12 +309,12 @@
       };
     }
 
-    //  Toggle abrir/cerrar 
     function openSearch() {
       wrap.classList.add('open');
       toggleBtn?.setAttribute('aria-expanded', 'true');
       setTimeout(() => input.focus(), 360);
     }
+
     function closeSearch() {
       wrap.classList.remove('open');
       toggleBtn?.setAttribute('aria-expanded', 'false');
@@ -348,9 +332,16 @@
     document.addEventListener('click', (e) => {
       if (!wrap.contains(e.target) && !dropdown.contains(e.target)) closeSearch();
     });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeSearch();
+
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSearch(); });
+
+    window.addEventListener('resize', () => {
+      if (dropdown.style.display === 'block') positionDropdown();
     });
+
+    window.addEventListener('scroll', () => {
+      if (dropdown.style.display === 'block') positionDropdown();
+    }, { passive: true });
 
     clearBtn?.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -361,7 +352,6 @@
       input.focus();
     });
 
-    //  Input en tiempo real 
     input.addEventListener('input', function () {
       const q = this.value.trim();
       if (clearBtn) clearBtn.style.display = q ? 'flex' : 'none';
@@ -370,7 +360,6 @@
       filterCards(q);
     });
 
-    //  Dropdown 
     function renderDropdown(q, lang) {
       const lbl     = LABELS[lang || getLang()] || LABELS.es;
       const query   = q.toLowerCase();
@@ -378,12 +367,10 @@
         item.title.toLowerCase().includes(query) || item.desc.toLowerCase().includes(query)
       );
 
+      positionDropdown();
+
       if (!results.length) {
-        dropdown.innerHTML = `
-          <div class="search-empty">
-            <i class="bi bi-search"></i>
-            <span>${lbl.empty(q)}</span>
-          </div>`;
+        dropdown.innerHTML = `<div class="search-empty"><i class="bi bi-search"></i><span>${lbl.empty(q)}</span></div>`;
         dropdown.style.display = 'block';
         return;
       }
@@ -402,8 +389,7 @@
 
       dropdown.querySelectorAll('.search-result-item').forEach(el => {
         el.addEventListener('click', () => {
-          const item = results[+el.dataset.idx];
-          scrollToCard(item.card);
+          scrollToCard(results[+el.dataset.idx].card);
           closeSearch();
         });
       });
@@ -417,8 +403,10 @@
     }
 
     function highlight(text, q) {
-      return text.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi'),
-        '<mark>$1</mark>');
+      return text.replace(
+        new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi'),
+        '<mark>$1</mark>'
+      );
     }
 
     function scrollToCard(card) {
@@ -427,13 +415,12 @@
       setTimeout(() => card.classList.remove('search-highlight'), 2000);
     }
 
-    //  Filtrar cards en grid 
     function filterCards(query, lang) {
       const cols = document.querySelectorAll('#Episodios .row.g-4 > [class*="col-"]');
       let visible = 0;
 
       cols.forEach(col => {
-        const card = col.querySelector('.anime-card');
+        const card    = col.querySelector('.anime-card');
         if (!card) return;
         const title   = (card.querySelector('.card-title')?.textContent || '').toLowerCase();
         const desc    = (card.querySelector('.card-text')?.textContent  || '').toLowerCase();
@@ -464,9 +451,7 @@
           row.parentNode.insertBefore(noRes, row.nextSibling);
         }
       }
-      if (noRes) {
-        noRes.style.display = (query && visible === 0) ? 'flex' : 'none';
-      }
+      if (noRes) noRes.style.display = (query && visible === 0) ? 'flex' : 'none';
     }
   });
 })();
