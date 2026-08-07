@@ -20,6 +20,39 @@
     return (name || '?').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
   }
 
+  function getAvatarMarkup(avatarSrc, initials) {
+    return avatarSrc ? `<img src="${avatarSrc}" alt="Avatar">` : initials;
+  }
+
+  function syncAvatarState(avatarSrc) {
+    const session = getSession();
+    if (!session) return null;
+
+    session.avatar = avatarSrc;
+    saveSession(session);
+
+    const users = getUsers();
+    const idx = users.findIndex(u => u.email === session.email);
+    if (idx !== -1) {
+      users[idx].avatar = avatarSrc;
+      localStorage.setItem(USERS_KEY, JSON.stringify(users));
+    }
+
+    return session;
+  }
+
+  function updateAvatarViews(avatarSrc, initials) {
+    const avatarHTML = getAvatarMarkup(avatarSrc, initials);
+
+    ['nav-avatar', 'dropdown-avatar', 'z-panel-avatar-preview'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = avatarHTML;
+    });
+
+    const removeBtn = document.getElementById('z-panel-remove-photo');
+    if (removeBtn) removeBtn.disabled = !avatarSrc;
+  }
+
   function logout() {
     localStorage.removeItem(SESSION_KEY);
     if (window.ZNotify) ZNotify.logoutExitoso();
@@ -268,6 +301,26 @@
         font-family: 'Inter', system-ui, sans-serif;
       }
       .z-panel-btn-upload:hover { background: rgba(98,167,251,0.25); }
+      .z-panel-btn-remove {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: rgba(255, 111, 97, 0.1);
+        border: 1px solid rgba(255, 111, 97, 0.28);
+        color: #ff8d83;
+        border-radius: 999px;
+        padding: 8px 18px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s, opacity 0.2s;
+        font-family: 'Inter', system-ui, sans-serif;
+      }
+      .z-panel-btn-remove:hover { background: rgba(255, 111, 97, 0.18); }
+      .z-panel-btn-remove:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
       .z-panel-hint {
         font-size: 11.5px;
         color: rgba(246,249,255,0.35);
@@ -451,9 +504,7 @@
 
     const initials = getInitials(sesion.usuario);
     const avatarSrc = sesion.avatar;
-    const avatarHTML = avatarSrc
-      ? `<img src="${avatarSrc}" alt="Avatar">`
-      : initials;
+    const avatarHTML = getAvatarMarkup(avatarSrc, initials);
     const avatarClass = avatarSrc ? 'avatar-nav' : 'avatar-nav';
 
     const userLi = document.createElement('li');
@@ -520,7 +571,7 @@
 
     const initials  = getInitials(sesion.usuario);
     const avatarSrc = sesion.avatar;
-    const avatarHTML = avatarSrc ? `<img src="${avatarSrc}" alt="Avatar">` : initials;
+    const avatarHTML = getAvatarMarkup(avatarSrc, initials);
 
     const panel = document.createElement('div');
     panel.id = 'z-user-panel';
@@ -547,6 +598,9 @@
               <label class="z-panel-btn-upload" for="z-panel-file-input">
                 <i class="bi bi-camera-fill"></i> <span data-i18n="session-cambiar-foto">Cambiar foto</span>
               </label>
+              <button type="button" class="z-panel-btn-remove" id="z-panel-remove-photo" ${avatarSrc ? '' : 'disabled'}>
+                <i class="bi bi-trash3"></i> <span data-i18n="session-quitar-foto">Quitar foto</span>
+              </button>
               <input type="file" id="z-panel-file-input" accept="image/*" style="display:none">
               <p class="z-panel-hint" data-i18n="session-foto-hint">JPG, PNG o GIF · Máx 2 MB</p>
             </div>
@@ -623,26 +677,41 @@
         if (window.ZNotify) ZNotify.archivoGrande();
         return;
       }
+
+      const session = getSession();
+      if (!session) return;
+
+      const initials = getInitials(session.usuario);
+      const previewUrl = URL.createObjectURL(file);
+
+      // Vista previa inmediata: no esperamos al FileReader para que el cambio se vea al instante.
+      updateAvatarViews(previewUrl, initials);
+
       const reader = new FileReader();
       reader.onload = function (ev) {
         const base64 = ev.target.result;
-        // Actualizar preview del panel
-        document.getElementById('z-panel-avatar-preview').innerHTML = `<img src="${base64}" alt="Avatar">`;
-        // Actualizar sesión y lista de usuarios
-        const s = getSession();
-        s.avatar = base64;
-        saveSession(s);
-        const users = getUsers();
-        const idx = users.findIndex(u => u.email === s.email);
-        if (idx !== -1) { users[idx].avatar = base64; localStorage.setItem(USERS_KEY, JSON.stringify(users)); }
-        // Actualizar avatares del navbar
-        ['nav-avatar', 'dropdown-avatar'].forEach(id => {
-          const el = document.getElementById(id);
-          if (el) el.innerHTML = `<img src="${base64}" alt="Avatar">`;
-        });
+        const s = syncAvatarState(base64);
+        if (!s) {
+          URL.revokeObjectURL(previewUrl);
+          return;
+        }
+        updateAvatarViews(base64, getInitials(s.usuario));
+        URL.revokeObjectURL(previewUrl);
         if (window.ZNotify) ZNotify.fotoPerfil();
       };
+      reader.onerror = function () {
+        URL.revokeObjectURL(previewUrl);
+      };
       reader.readAsDataURL(file);
+    });
+
+    // Quitar foto
+    document.getElementById('z-panel-remove-photo').addEventListener('click', function () {
+      const s = syncAvatarState(null);
+      if (!s) return;
+      const initials = getInitials(s.usuario);
+      updateAvatarViews(null, initials);
+      if (window.ZNotify) ZNotify.fotoPerfil();
     });
 
     // Cambiar contraseña
